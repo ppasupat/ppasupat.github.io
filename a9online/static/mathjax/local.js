@@ -91,4 +91,4 @@ MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
   TEX.Macro("ci", "\\perp\\!\\!\\!\\perp");
 });
 
-MathJax.Ajax.loadComplete("[MathJax]/config/local.js");
+MathJax.Ajax.loadComplete("https://ppasupat.github.io/a9online/static/mathjax/local.js");
