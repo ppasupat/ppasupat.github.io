@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>Bash Quotes and Brackets</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="Bash Quotes and Brackets">Bash Quotes and Brackets</div>
+      <div id="content">
+<h1 id="quotes">Quotes</h1>
+<p><strong><em>Reference</em></strong> <a target="_blank" href="http://wiki.bash-hackers.org/syntax/quoting">http://wiki.bash-hackers.org/syntax/quoting</a></p>
+<ul>
+<li><strong>Per Character:</strong> <code>\$HOME</code> / <code>\&lt;newline&gt;</code> (line continuation)</li>
+<li><strong>Double Quote:</strong> <code>"..."</code><ul>
+<li>Escape:<ul>
+<li>spaces</li>
+<li>single quotes</li>
+<li>pattern matching characters and path name expansion  (<code>*</code> / <code>?</code> / <code>{a,b,c}</code>)</li>
+<li>process substitution (<code>&lt;(ls -l)</code>)</li>
+</ul>
+</li>
+<li>Everything else remains (e.g. <code>"$HOME"</code> will be expanded)</li>
+<li><code>"\$"</code> becomes <code>$</code> but <code>"\x"</code> becomes <code>\x</code></li>
+</ul>
+</li>
+<li><strong>Single Quote:</strong> <code>'...'</code><ul>
+<li>Escape everything except <code>'</code><ul>
+<li>Even <code>'\$'</code> becomes <code>\$</code></li>
+</ul>
+</li>
+<li>To use <code>...'...</code>, must enter <code>...'\''...</code> or <code>...'"'"'...</code></li>
+</ul>
+</li>
+<li><strong>Localized String:</strong> <code>$"..."</code><ul>
+<li>Ignored when the locale is POSIX or C</li>
+</ul>
+</li>
+<li><strong>ANSI C String:</strong> <code>$'...'</code><ul>
+<li>Use specific escape sequences similar to C:<ul>
+<li><code>\'</code>, <code>\"</code>, <code>\\</code></li>
+<li><code>\a</code>, <code>\b</code>, <code>\e</code> (ESC), <code>\f</code>, <code>\n</code>, <code>\r</code>, <code>\t</code>, <code>\v</code></li>
+<li><code>\c♥</code> (CTRL + ♥ where ♥ is some character)</li>
+<li><code>\nnn</code> (octal), <code>\xHH</code> (hex), <code>\uXXXX</code> (unicode)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="brackets">Brackets</h1>
+<p><strong><em>Reference</em></strong> <a target="_blank" href="http://stackoverflow.com/questions/2188199/how-to-use-double-or-single-bracket-parentheses-curly-braces">http://stackoverflow.com/questions/2188199/how-to-use-double-or-single-bracket-parentheses-curly-braces</a></p>
+<ul>
+<li><code>[</code> = <code>test</code>; the closing <code>]</code> is optional</li>
+<li><code>[[</code> = enhanced <code>[</code> (e.g., can use <code>||</code> and <code>&amp;&amp;</code> instead of <code>-o</code> and <code>-a</code>)</li>
+<li><code>[...]</code> = array index<ul>
+<li><code>array[0]=value</code></li>
+<li><code>element=${array[0]}</code></li>
+</ul>
+</li>
+<li><code>{...}</code><ul>
+<li>Brace expansion: <code>{a,b,c}</code> / <code>{a..z}</code></li>
+<li>Code block: <code>{ date; make 2&gt;&amp;1; date; } | tee logfile</code><ul>
+<li>The last semicolon in <code>{...}</code> is mandatory</li>
+<li><code>{...}</code> must be surrounded by spaces</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>${...}</code> = parameter expansion<ul>
+<li><code>${param:-word}</code> = if <code>param</code> is not set, return <code>word</code></li>
+<li><code>${param:=word}</code> = if <code>param</code> is not set, set it to <code>word</code> and return <code>word</code></li>
+<li><code>${paramr:offset}</code> / <code>${param:offset:length}</code> (negative indices work too)</li>
+<li><code>${#param}</code> = length</li>
+<li><code>${param#prefix}</code> / <code>${param##prefix}</code> = remove shortest / longest prefix (mnemonic: <code>#</code> comes before <code>$</code> on the keyboard)</li>
+<li><code>${param%suffix}</code> / <code>${param%%suffix}</code> = remove shortest / longest suffix (mnemonic: <code>%</code> comes after <code>$</code> on the keyboard)</li>
+<li><code>${param/pattern/sub}</code></li>
+</ul>
+</li>
+<li><code>(...)</code><ul>
+<li>Array: <code>array=(1 2 3)</code></li>
+<li>Subshell: <code>&lt;(ls -l)</code> / <code>(cd .. &amp;&amp; pwd)</code> will not change directory in current shell</li>
+</ul>
+</li>
+<li><code>$(...)</code> = command substitution (= backticks)<ul>
+<li><code>result=$(COMMAND)</code></li>
+</ul>
+</li>
+<li><code>((...))</code> = arithmetic<ul>
+<li><code>((a++))</code></li>
+<li><code>((meaning = 42))</code></li>
+<li><code>for ((i=0; i&lt;10; i++))</code></li>
+<li><code>echo $((a + b + (14 * c)))</code></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:32:25.392295</div>
+    </div>
+  </div>
+</body>
+
+</html>

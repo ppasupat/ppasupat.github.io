@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>MCMC / Particle Filtering</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="MCMC / Particle Filtering">MCMC / Particle Filtering</div>
+      <div id="content">
+<p><strong>Gibbs Sampling</strong>, <strong>Metropolis-Hastings</strong> and <strong>Particle Filtering</strong> (<strong>Sequential Monte Carlo</strong>) are sampling-based methods for approximating distributions (joint or marginal) that are difficult to compute directly.</p>
+<h1 id="particle">Particle</h1>
+<p>All methods above use the concept of <strong>particle</strong>, which just means a complete assignment of all model variables. For example:</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">$X_1$</th>
+<th style="text-align:center">$X_2$</th>
+<th style="text-align:center">$X_3$ </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Particle 1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Particle 2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">Particle 3</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">Particle 4</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">...</td>
+<td style="text-align:center">...</td>
+<td style="text-align:center">...</td>
+<td style="text-align:center">...</td>
+</tr>
+</tbody>
+</table></div>
+<p>If the particles are sampled from some distribution, then we can compute the <strong>empirical distribution</strong> as an approximate of the true distribution.</p>
+<h1 id="mcmc-methods">MCMC Methods</h1>
+<p><strong>Markov Chain Monte Carlo</strong> (<strong>MCMC</strong>) algorithms are methods for randomly sampling particles from a complicated distribution based on Markov chains.</p>
+<h2 id="gibbs-sampling">Gibbs Sampling</h2>
+<p><strong>Gibbs sampling</strong> is a popular MCMC method. It is used when the joint probability $\prob{X_1,\dots,X_n}$ is complicated but the conditional probability $\prob{X_i\mid X_\text{other}}$ is easy to compute.</p>
+<blockquote>
+<ul>
+<li>Initialize a random sample $(X_1=v_1,\dots,X_n=v_n)$</li>
+<li>Until convergence:<blockquote>
+<ul>
+<li>Choose a variable $X_i$</li>
+<li>Fix the values of other variables, and then compute $$w(v) = \prob{X_i=v\mid X_{\text{other}} = v_{\text{other}}}$$ for all possible values $v$ of $X_i$.</li>
+<li>Replace $x \gets x[X_i = v]$ where $v$ is sampled from the distribution $w$.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p>Some variants of Gibbs sampling include:</p>
+<ul>
+<li><strong>Block Gibbs sampling</strong>: Choose multiple variables at the same time. The function $w$ becomes
+  $$w(v_1,\dots,v_r) = \prob{X_{i_1}=v_1,\dots,X_{i_r}=v_r\mid X_{\text{other}} = v_{\text{other}}}$$</li>
+<li><strong>Collapsed Gibbs sampling</strong>: Instead of using all other variables in $X_\text{other}$, marginalize out some variables. This is only a good idea when marginalization is easy to compute.</li>
+</ul>
+<h2 id="metropolis-hastings">Metropolis-Hastings</h2>
+<p>The other popular MCMC algorithm is the <strong>Metropolis-Hastings</strong> algorithm, which allows us to sample from an <em>unnormalized</em> distribution $f$.</p>
+<blockquote>
+<ul>
+<li>Initialize a random sample $x$</li>
+<li>Define a <strong>proposal density</strong> $Q(x_\text{next}\mid x_\text{prev})$. One constraint is that $Q$ must be symmetric: $Q(x\mid y) = Q(y\mid x)$. For example, use the Gaussian distribution around $x_\text{prev}$.</li>
+<li>Until bored:<blockquote>
+<ul>
+<li>Sample $x'$ from $Q(\cdot\mid x)$</li>
+<li>Compute the <strong>acceptance ratio</strong> $$\alpha = \frac{f(x')}{f(x)}$$</li>
+<li>If $\alpha \geq 1$, then immediately accept $x'$. Otherwise, accept $x'$ with probability $\alpha$.</li>
+<li>If $x'$ is accepted, use $x'$ for the next iteration. Otherwise, keep using $x$.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p>The acceptance ratio $\alpha$ indicates how likely $x'$ is wrt. the old sample $x$.</p>
+<h2 id="problems-with-mcmc">Problems with MCMC</h2>
+<p>Although (irreducible) MCMC chains are guaranteed to converge to the true distribution, MCMC methods usually have 2 disadvantages:</p>
+<ul>
+<li>The samples are correlated. In Metropolis-Hastings, this can be fixed by occasionally changing the proposal density $Q$ so that $Q(x_\text{far-away}\mid x)$ has more probability.</li>
+<li>During the <strong>burn-in</strong> period (1000 first samples or so — no good theoretical guarantee), the samples may not be related to the target distribution at all. So throw away the burn-in samples.</li>
+</ul>
+<h1 id="particle-filtering-sequential-monte-carlo-">Particle Filtering (Sequential Monte Carlo)</h1>
+<p>For simplicity, let's consider only the chain-structured graph:</p>
+<svg fill="white" stroke="black" width="200" height="100">
+<g transform="translate(20,20)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$X_1$</div></foreignObject></g>
+<g transform="translate(80,20)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$X_2$</div></foreignObject></g>
+<g transform="translate(140,20)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$X_3$</div></foreignObject></g>
+<g transform="translate(190,20)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\cdots$</div></foreignObject></g>
+<g><g transform="translate(20,80)"><circle fill="lightgray" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$E_1$</div></foreignObject></g><g><line stroke="black" y2="64" x2="20" y1="36" x1="20"></line><polygon transform="translate(20,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g></g><g><g transform="translate(80,80)"><circle fill="lightgray" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$E_2$</div></foreignObject></g><g><line stroke="black" y2="64" x2="80" y1="36" x1="80"></line><polygon transform="translate(80,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g></g><g><g transform="translate(140,80)"><circle fill="lightgray" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$E_3$</div></foreignObject></g><g><line stroke="black" y2="64" x2="140" y1="36" x1="140"></line><polygon transform="translate(140,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g></g>
+<g><line stroke="black" y2="19.999999999999996" x2="64" y1="20" x1="36"></line><polygon transform="translate(64,19.999999999999996) rotate(0)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g><g><line stroke="black" y2="19.999999999999996" x2="124" y1="20" x1="96"></line><polygon transform="translate(124,19.999999999999996) rotate(0)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="20" x2="170" y1="20" x1="156"></line><polygon transform="translate(170,20) rotate(0)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+</svg>
+
+<p>We first review <strong>beam search</strong>:</p>
+<blockquote>
+<ul>
+<li>Initialize $C = \set{\emptyset}$</li>
+<li>For each $i$:<blockquote>
+<ul>
+<li><strong>Extend</strong>: $$C \gets \set{x_{1:i-1} \cup \set{X_i = x_i} : x_{1:i-1} \in C, \text{all possible } x_i}$$</li>
+<li><strong>Prune</strong> $C$ to the top $K$ partial assignments with the highest weights.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p>There are 2 problems with beam search:</p>
+<ul>
+<li><strong>Extend</strong>: we need to consider all possible $v$, which is expensive.</li>
+<li><strong>Prune</strong>: the set of top $K$ partial assignments is usually not diverse.</li>
+</ul>
+<p><strong>Particle filtering</strong> solves both problems. Let us define:</p>
+<ul>
+<li><strong>Proposal distribution</strong> $\pi_i(x_i\mid x_{1:i-1})$ (similar to Metropolis-Hastings), which is the guess of the value of $X_i$ given the previous values. For HMM, we usually use the transition probability
+  $$\pi_i(x_i\mid x_{1:i-1}) = \prob{x_i\mid x_{i-1}}$$</li>
+<li><strong>Reweighting distribution</strong>:
+  $$w_i(x_{1:i}) = \frac{\prob{x_{1:i}}/\prob{x_{1:i-1}}}{\pi_i(x_i\mid x_{1:i-1})}$$
+  where the numerator is the potential that get multiplied when reach $X_i$. This reweighting function is defined to correct the "guessed" information $\pi_i$. For HMM,
+  $$w_i(x_{1:i}) = \frac{\prob{x_i\mid x_{i-1}}\prob{e_i\mid x_i}}{\prob{x_i\mid x_{i-1}}} = \prob{e_i\mid x_i}$$</li>
+</ul>
+<p>The algorithm is as follows:</p>
+<blockquote>
+<ul>
+<li>Initialize $C = \set{\emptyset}$</li>
+<li>For each $i$:<blockquote>
+<ul>
+<li><strong>Extend</strong>: $$C \gets \set{x_{1:i-1} \cup \set{X_i = x_i} : x_{1:i-1} \in C, x_i \sim \pi(x_i\mid x_{1:i-1})}$$ Only sample one $x_i$ for each element in $C$. (Note that multiple elements $x_{1:i-1}$ in $C$ can share the same value.)</li>
+<li><strong>Reweight</strong>: Compute weight $w_i(x_{1:i})$ for each $x_{1:i}$ in $C$</li>
+<li><strong>Resample</strong>: $C \gets$ sample $K$ elements independently from $C$ according to the computed weight. Note that we can get repeated samples.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p>Particle filtering can also be viewed as a recursive version of <strong>importance sampling</strong>.</p>
+<h1 id="reference">Reference</h1>
+<ul>
+<li>CS221 Slides</li>
+<li><a target="_blank" href="http://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">http://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo</a></li>
+<li><a target="_blank" href="http://en.wikipedia.org/wiki/Particle_filter">http://en.wikipedia.org/wiki/Particle_filter</a></li>
+</ul>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:48:55.863294</div>
+    </div>
+  </div>
+</body>
+
+</html>

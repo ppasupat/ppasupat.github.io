@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>∇</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="∇">∇</div>
+      <div id="content">
+<p>The symbol $\nabla$ (<strong>nabla</strong>) represents the <strong>del operator</strong>.</p>
+<h1 id="usage">Usage</h1>
+<h2 id="definition">Definition</h2>
+<p>$$\nabla = \nail{\fracp{}{x_1}, \dots, \fracp{}{x_n}}$$</p>
+<p>For example, using the standard basis $\hat i, \hat j, \hat k$ of $\RR^3$, we get
+$$\nabla = \nail{\fracp{}{x}, \fracp{}{y}, \fracp{}{z}} = \hat i\fracp{}{x} + \hat j\fracp{}{y} + \hat k\fracp{}{z}$$</p>
+<h2 id="gradient">Gradient</h2>
+<p>If $f:\RR^3\to\RR$ is a scalar field,
+$$\Mr{grad} f = \nabla f = \nail{\fracp{f}{x}, \fracp{f}{y}, \fracp{f}{z}} \in \RR^3$$
+The gradient is the "slope" direction and magnitude.</p>
+<h2 id="divergence">Divergence</h2>
+<p>If $f:\RR^3\to\RR^3$ is a vector field and $f(x,y,z) = (f_x,f_y,f_z)$,
+$$\Mr{div} f = \nabla\cdot f = \fracp{f_x}{x} + \fracp{f_y}{y} + \fracp{f_z}{z} \in \RR$$
+The divergence measures how much field diverges from the given point.</p>
+<h2 id="curl">Curl</h2>
+<p>If $f:\RR^3\to\RR^3$ is a vector field and $f(x,y,z) = (f_x,f_y,f_z)$,
+$$\Mr{curl} f = \nabla\times f = \abs{\begin{matrix}
+\fracp{}{x} &amp; \fracp{}{y} &amp; \fracp{}{z} \\
+f_x &amp; f_y &amp; f_z \\
+\hat i &amp; \hat j &amp; \hat k
+\end{matrix}}\in\RR^3$$
+The curl is the torque at a given point.</p>
+<h2 id="directional-derivative">Directional Derivative</h2>
+<p>If $f:\RR^3\to\RR$ is a scalar field and $a(x,y,z) = (a_x,a_y,a_z)$,
+$$a\cdot\Mr{grad} f = (a\cdot\nabla) f = a_x\fracp{f}{x} + a_y\fracp{f}{y} + a_z\fracp{f}{z} \in \RR$$</p>
+<h2 id="hessian-laplacian">Hessian / Laplacian</h2>
+<p>This one is confusing. ML people use $\nabla^2$ to denote the <strong>Hessian</strong> matrix. For $f:\RR^3\to\RR$,
+$$\nabla^2 f = \matx{
+\fracp{^2}{x^2} f &amp; \fracp{^2}{x\partial y} f &amp; \fracp{^2}{x\partial z} f \\
+\fracp{^2}{y\partial x} f &amp; \fracp{^2}{y^2} f &amp; \fracp{^2}{y\partial z} f \\
+\fracp{^2}{z\partial x} f &amp; \fracp{^2}{z\partial y} f &amp; \fracp{^2}{z^2} f \\
+}\in\RR^3$$</p>
+<p>However, in physics, $\nabla^2$ denotes the <strong>Laplacian</strong> operator
+$$\Delta f = \nabla^2 f = \nabla\cdot\nabla f = \fracp{^2}{x^2} f + \fracp{^2}{y^2} f + \fracp{^2}{z^2} f \in \RR$$</p>
+<p>Both operators can also be applied on $f:\RR^3\to\RR^\text{higher}$, but the results will have more dimensions.</p>
+<h1 id="references">References</h1>
+<ul>
+<li><a target="_blank" href="http://en.wikipedia.org/wiki/Del">http://en.wikipedia.org/wiki/Del</a></li>
+</ul>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:31:43.734581</div>
+    </div>
+  </div>
+</body>
+
+</html>

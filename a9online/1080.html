@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>[012] Dirichlet Distribution</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="[012] Dirichlet Distribution">[012] Dirichlet Distribution</div>
+      <div id="content">
+<p><strong>Dirichlet distribution</strong> is a conjugate prior of the multinomial distribution. Each sample from Dirichlet distribution $\Mr{Dir}(\alpha_1, \dots, \alpha_K)$ is a $K$-dimensional vector $\pi = (\pi_1, \dots, \pi_K)$ such that $\sum_i \pi_i = 1$.</p>
+<h1 id="properties">Properties</h1>
+<p>Let $\alpha = (\alpha_1, \dots, \alpha_K)$.</p>
+<ul>
+<li><p>If $\pi \sim \Mr{Dir}(\alpha_1, \dots, \alpha_k)$, then
+  $$\prob{\pi\mid\alpha} = \frac{\Gamma(\sum a_j)}{\prod \Gamma(\alpha_j)} \prod_{j=1}^K \pi_j^{\alpha_j - 1} \propto \prod_{j=1}^K \pi_j^{\alpha_j - 1}$$</p>
+</li>
+<li><p>$\ex[\alpha]{\pi_j} = \alpha_j / (\alpha_1 + \dots + \alpha_K)$</p>
+</li>
+<li><p>(<strong>Agglomeration</strong>) If $(\pi_1, \dots, \pi_K) \sim \Mr{Dir}(\alpha_1, \dots, \alpha_K)$, then
+  $$(\pi_1 + \pi_2, \pi_3, \dots, \pi_K) \sim \Mr{Dir}(\alpha_1 + \alpha_2, \alpha_3, \dots, \alpha_K)$$</p>
+</li>
+<li><p>Dirichlet distribution is a conjugate prior of the multinomial distribution. This can be shown by calculating the posterior
+  $$\begin{align*}
+  \prob{\pi\midd\set{x^{(1)}, \dots, x^{(L)}}, \alpha}
+  &amp;\propto \prob{\pi\mid\alpha}\prob{\set{x^{(1)}, \dots, x^{(L)}}\midd\pi} \\
+  &amp;\propto \prod_j \pi_j^{\alpha_j - 1} \cdot \prod_j \pi_j^{C_j}
+  \end{align*}$$
+  where $C_j$ is the number of times we see $j$ among the $x\i$'s. Therefore,
+  $$\pi\mid\set{x^{(1)}, \dots, x^{(L)}} \sim \Mr{Dir}(\alpha_1 + C_1, \dots, \alpha_K + C_K)$$</p>
+</li>
+</ul>
+<h1 id="intuitions">Intuitions</h1>
+<p>Visualization of Dirichlet distribution (lighter = higher density):</p>
+<p><img src="uploads/dp-dirichlet.png" alt="Dirichlet Distribution" title="Visualization of Dirichlet Distribution"></p>
+<p>Note that $\Mr{Dir}(1,1,1)$ is the uniform distribution. We often use $\alpha &lt; 1$ since the distribution will prefer equal-sized clusters.</p>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:58:25.906900</div>
+    </div>
+  </div>
+</body>
+
+</html>

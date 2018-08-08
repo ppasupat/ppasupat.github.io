@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>[013] Mixture Models</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="[013] Mixture Models">[013] Mixture Models</div>
+      <div id="content">
+<p>As a running example, we will consider the problem of mixture modeling. Let's consider the parametric case first.</p>
+<h1 id="finite-mixture-models">Finite Mixture Models</h1>
+<p>Suppose we have data $x_1, \dots, x_N$ and we want to group them into clusters. Each cluster $j$ has distribution $F(\theta_j)$. (For example, $F$ can be multivariate Gaussian, and $\theta_j$ will be $(\mu_j, \Sigma_j)$.)</p>
+<p>Suppose we know the number of clusters $K$. There are 2 ways to model the mixture.</p>
+<h1 id="view-1">View 1</h1>
+<svg fill="white" stroke="black" width="220" height="195">
+<g transform="translate(100,40)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\pi$</div></foreignObject></g>
+<g transform="translate(65,70)"><rect fill="white" height="120" width="70" y="0" x="0"></rect><foreignObject height="120" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 114px; text-align: right; vertical-align: bottom; padding: 3px;">$N$</div></foreignObject></g>
+<g transform="translate(145,70)"><rect fill="white" height="60" width="70" y="0" x="0"></rect><foreignObject height="60" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 54px; text-align: right; vertical-align: bottom; padding: 3px;">$K$</div></foreignObject></g>
+<g transform="translate(40,20)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\alpha$</div></foreignObject></g>
+<g transform="translate(40,60)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$K$</div></foreignObject></g>
+<g transform="translate(100,100)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$z_i$</div></foreignObject></g>
+<g transform="translate(100,160)"><circle fill="lightgray" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$x_i$</div></foreignObject></g>
+<g transform="translate(180,100)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\theta_j$</div></foreignObject></g>
+<g transform="translate(180,40)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\lambda$</div></foreignObject></g>
+<g><line stroke="black" y2="34.94035574373059" x2="84.82106723119178" y1="24.666666666666664" x1="54"></line><polygon transform="translate(84.82106723119178,34.94035574373059) rotate(18.43494882292201)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="45.05964425626941" x2="84.82106723119178" y1="55.333333333333336" x1="54"></line><polygon transform="translate(84.82106723119178,45.05964425626941) rotate(-18.43494882292201)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="84" x2="100" y1="56" x1="100"></line><polygon transform="translate(100,84) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="144" x2="100" y1="116" x1="100"></line><polygon transform="translate(100,144) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="84" x2="180" y1="54" x1="180"></line><polygon transform="translate(180,84) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="150.4" x2="112.8" y1="109.6" x1="167.2"></line><polygon transform="translate(112.8,150.4) rotate(143.13010235415598)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+</svg>
+
+<p>Let $z_i \in \set{1,\dots,K}$. To sample $x_1, \dots, x_N$,</p>
+<ul>
+<li>$z_i \sim \Mr{Multi}(\pi) = \Mr{Multi}(\pi_1, \dots, \pi_K)$</li>
+<li>$x_i \sim F(\theta_{z_i})$</li>
+</ul>
+<p>The priors are</p>
+<ul>
+<li>$\theta_j \sim H(\lambda)$ for some conjugate prior $H$ of $F$</li>
+<li>$\pi \sim \Mr{Dir}(\alpha_1, \dots, \alpha_K)$. Usually, we set $\alpha_i = \alpha_0 / K$.</li>
+</ul>
+<h1 id="view-2">View 2</h1>
+<svg fill="white" stroke="black" width="160" height="235">
+<g transform="translate(100,80)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$G$</div></foreignObject></g>
+<g transform="translate(65,110)"><rect fill="white" height="120" width="70" y="0" x="0"></rect><foreignObject height="120" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 114px; text-align: right; vertical-align: bottom; padding: 3px;">$N$</div></foreignObject></g>
+<g transform="translate(100,20)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$H$</div></foreignObject></g>
+<g transform="translate(40,80)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\alpha$</div></foreignObject></g>
+<g transform="translate(100,140)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\bar\theta_i$</div></foreignObject></g>
+<g transform="translate(100,200)"><circle fill="lightgray" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$x_i$</div></foreignObject></g>
+<g><line stroke="black" y2="64" x2="100" y1="34" x1="100"></line><polygon transform="translate(100,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="80" x2="84" y1="80" x1="54"></line><polygon transform="translate(84,80) rotate(0)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="124" x2="100" y1="96" x1="100"></line><polygon transform="translate(100,124) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="184" x2="100" y1="156" x1="100"></line><polygon transform="translate(100,184) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+</svg>
+
+<p>Let $\Theta = \set{\theta_1, \dots, \theta_K}$ be the parameter space for $x$. Let $G$ be a distribution on $\Theta$ defined as</p>
+<p>$$\begin{align*}
+G(\theta) &amp;= \sum_j \pi_j \delta(\theta, \theta_j) \\
+&amp;= \pi_j \text{ such that } (\theta = \theta_j)
+\end{align*}$$</p>
+<p>where $\pi \sim \Mr{Dir}(\alpha_1, \dots, \alpha_K)$ and $\theta_j \sim H(\lambda)$.</p>
+<p>Let $\bar{\theta}$ be the draws (or the samples) from $G$. Then to sample $x_1, \dots, x_N$, we sample $\bar{\theta}_i \sim G$ and $x_i \sim F(\bar{\theta}_i)$. The connection to View 1 is that $\bar{\theta}_i = \theta_{z_i}$.</p>
+<p><strong>Connection with De Finetti's Theorem:</strong></p>
+<ul>
+<li>$\bar{\theta}_i$ corresponds to $y_i$</li>
+<li>$\Theta$ corresponds to $Y$</li>
+<li>The parameter space $\Pi := \set{\text{all possible }\pi\text{'s}}$ corresponds to $\Phi$</li>
+</ul>
+<p>It is silly to limit $\Theta$ to the set of $K$ elements. In the next chapter, we will extend $\Theta$ to the set of all possible $\theta$'s (that are compatible with $F$).</p>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:43:08.754915</div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <script type="text/javascript" src="static/spoiler.js"></script>
+  <title>Beautiful Soup</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="Beautiful Soup">Beautiful Soup</div>
+      <div id="content">
+<p><strong><em>Reference</em></strong> <a href="http://www.crummy.com/software/BeautifulSoup/bs4/doc/" target="_blank">http://www.crummy.com/software/BeautifulSoup/bs4/doc/</a></p>
+<p><code>soup = BeautifulSoup(markup{, parser})</code></p>
+<h2 id="parsers">Parsers</h2>
+<ul>
+<li>Default uses Python's <code>html.parser</code></li>
+<li><code>lxml</code> (<code>"lxml"</code>, <code>"xml"</code>): very fast (<code>pip install lxml</code>)</li>
+<li><code>html5lib</code>: (<code>"html5lib"</code>): HTML5-compliant but slow (<code>pip install html5lib</code>)</li>
+</ul>
+<h1 id="types">Types</h1>
+<h2 id="tag">Tag</h2>
+<p><em>(includes <code>Tag</code> and <code>BeautifulSoup</code>)</em></p>
+<ul>
+<li><code>tag = soup.b</code></li>
+<li><code>tag.name</code> (can assign too)</li>
+<li><code>tag['class']</code> / <code>tag.attrs</code> (can assign / return a list)</li>
+</ul>
+<h2 id="navigablestring">NavigableString</h2>
+<p><em>(includes <code>NavigableString</code>, <code>Comment</code>, <code>CData</code>, <code>ProcessingInstruction</code>, <code>Declaration</code>, and <code>Doctype</code>)</em></p>
+<ul>
+<li><code>tag.string</code> (Should convert to unicode with <code>unicode()</code> before use)</li>
+<li><code>tag.string.replace_with("new stuff")</code></li>
+<li>Many properties are similar to <code>Tag</code></li>
+</ul>
+<h1 id="navigate">Navigate</h1>
+<h2 id="going-down">Going Down</h2>
+<ul>
+<li><code>soup.head</code> / <code>soup.body.b</code> (only the first one is returned; use <code>soup.find_all('a')</code> to get all)</li>
+<li><code>tag.contents</code> (list) / <code>tag.children</code> (generator) / <code>tag.descendants</code> (generator)</li>
+<li><code>tag.string</code>:<ul>
+<li>One child → return the string of the child</li>
+<li>Multiple child → return <code>None</code>!!!</li>
+</ul>
+</li>
+<li><code>tag.strings</code> (generator) / <code>tag.stripped_strings</code> (generator; whitespace strings removed)</li>
+</ul>
+<h2 id="going-up">Going Up</h2>
+<ul>
+<li><code>tag.parent</code> (can be used on <code>NavigableString</code> too)</li>
+<li><code>tag.parents</code> (generator)</li>
+</ul>
+<h2 id="going-sideways">Going Sideways</h2>
+<ul>
+<li><code>tag.next_sibling</code> / <code>tag.previous_sibling</code></li>
+<li><code>tag.next_siblings</code> (generator) / <code>tag.previous_siblings</code> (generator)</li>
+</ul>
+<h2 id="going-in-parse-order">Going in Parse Order</h2>
+<ul>
+<li><code>tag.next_element</code> / <code>tag.previous_element</code></li>
+<li><code>tag.next_elements</code> (generator) / <code>tag.previous_elements</code> (generator)</li>
+</ul>
+<h1 id="search">Search</h1>
+<h2 id="acceptable-argument-types-aat-">Acceptable Argument Types (AAT)</h2>
+<ul>
+<li>string: <code>'b'</code></li>
+<li>regex: <code>re.compile("t")</code> (use <code>match()</code> method, so <code>/t/</code> will also match <code>html</code>)</li>
+<li>list: <code>['a', 'b']</code></li>
+<li><code>True</code> (all tags, not strings)</li>
+<li>function that takes a <code>Tag</code> and returns <code>True</code> or <code>False</code></li>
+</ul>
+<h2 id="find-all">Find All</h2>
+<p>The main function is <code>tag.find_all(name, attrs, recursive=True, text, limit=None, **kwargs)</code></p>
+<p><strong>Shorthand:</strong> <code>tag(...)</code> is equivalent to <code>tag.find_all(...)</code></p>
+<ul>
+<li>Name: <code>name</code> (any AAT)<ul>
+<li>Note that <code>tag.a</code> is equivalent to <code>tag.find_all('a')</code></li>
+</ul>
+</li>
+<li>Attributes: <code>**kwargs</code>, <code>attrs</code><ul>
+<li><code>id='link2'</code> / <code>href=re.compile("elsie")</code> / ... (any AAT)</li>
+<li><code>class_="sister"</code> / <code>class_=re.compile("itl")</code> / ... (any AAT)<ul>
+<li>1 class string → any position</li>
+<li>multiple class string → must be of the same order! (<code>tag.select(...)</code> is more flexible)</li>
+</ul>
+</li>
+<li><code>attrs={"data-foo": "value"}</code> (for attributes with hyphens / any AAT)</li>
+</ul>
+</li>
+<li>Text: <code>text</code><ul>
+<li>Without <code>name</code>: search for text (any AAT)</li>
+<li>With <code>name</code>: search for tags such that <code>tag.string</code> matches the <code>text</code> argument (any AAT)</li>
+</ul>
+</li>
+</ul>
+<h2 id="other-functions">Other Functions</h2>
+<ul>
+<li><code>tag.find(...)</code> finds 1 result (same signature as <code>find_all</code>, except <code>limit</code>)</li>
+<li><code>tag.find_{parents|{next|previous}_siblings|all_{next|previous}}(...)</code></li>
+<li><code>tag.find_{parent|{next|previous}_sibling|{next|previous}}(...)</code></li>
+<li><code>tag.select(...)</code> (CSS pattern)</li>
+</ul>
+<h1 id="modify">Modify</h1>
+<ul>
+<li><code>tag.name = "blockquote"</code> / <code>tag['class'] = 'verybold'</code> / <code>del tag['class']</code></li>
+<li><code>tag.string = "New link text."</code> (old content and children will be removed!)</li>
+<li><code>tag.append(new_...)</code> / <code>tag.insert(idx, new_...)</code> / <code>tag.insert_{before|after}(new_...)</code><ul>
+<li><code>new_string = soup.new_string(" there")</code> (Python unicode object works too)</li>
+<li><code>new_comment = soup.new_string("Nice to see you.", Comment)</code></li>
+<li><code>new_tag = soup.new_tag("a", href="http://www.example.com")</code></li>
+</ul>
+</li>
+<li><code>tag.clear()</code> (clear inside but not self)</li>
+<li><code>tag.extract()</code> (remove self and return)</li>
+<li><code>tag.decompose()</code> (remove self and destroy completely)</li>
+<li><code>tag.replace_with(soup.new_tag("b"))</code> (replace and return the old one)</li>
+<li><code>tag.wrap(soup.new_tag("b"))</code></li>
+<li><code>tag.unwrap()</code> (replace self with the inside and return the old one)</li>
+</ul>
+<h1 id="output">Output</h1>
+<ul>
+<li><code>tag.prettify()</code> / <code>tag.decode()</code> = <code>unicode(tag)</code> / <code>tag.encode()</code> = <code>str(tag)</code> (encoded in UTF-8)<ul>
+<li>argument <code>formatter</code> can be <code>"minimal"</code>, <code>"html"</code>, <code>None</code>, or a function</li>
+</ul>
+</li>
+<li><code>tag.get_text()</code> / <code>tag.get_text('|', strip=True)</code> (specify separator)<ul>
+<li>can also use <code>[text for text in tag.stripped_strings]</code></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      <div id="content-time">Exported: 2018-03-21T11:37:17.813430</div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,9 +1,285 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0;url=https://cs.stanford.edu/~ppasupat/">
+  <meta charset="utf-8">
+  <meta name="description" context="Panupong Pasupat's Personal Page">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panupong Pasupat's Personal Page</title>
+  <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link href="style/main.css" rel="stylesheet" type="text/css">
+  <link href="style/favicon.png" rel="shortcut icon" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" integrity="sha384-B41nY7vEWuDrE9Mr+J2nBL0Liu+nl/rBXTdpQal730oTHdlrlXHzYMOhDU60cwde" crossorigin="anonymous">
 </head>
 <body>
-  Redirecting to <a href="https://cs.stanford.edu/~ppasupat/">https://cs.stanford.edu/~ppasupat/</a> ...
+
+<div id="wrapper">
+
+  <div id="header">
+    <div id="header-photo" class="header-cell">
+      <img id="photo" alt="photo" src="style/photo.jpg">
+    </div>
+    <div id="header-info" class="header-cell">
+      <h1>Panupong (<a href="http://tvtropes.org/pmwiki/pmwiki.php/Main/AnIcePerson">Ice</a>) Pasupat</h1>
+      <p>PhD Student</p>
+      <p>Department of Computer Science, Stanford University</p>
+      <p class="ps">
+        <a href="#" id="email">Email</a>
+        <a href="resource/resume.pdf">Resume</a>
+        <a href="https://github.com/ppasupat/">GitHub</a>
+      </p>
+      <noscript>(Please enable JavaScript to see the email address)</noscript>
+    </div>
+  </div>
+  
+  <div id="info" class="section">
+    <p><strong>Advisor:</strong> <a href="http://cs.stanford.edu/~pliang/">Percy Liang</a></p>
+    <p><strong>Areas of Interest:</strong> Natural Language Processing</p>
+    <p><strong>Office:</strong> Gates Building, Room 256</p>
+  </div>
+
+  <p class="centerize ps"><strong>Jump to:</strong>
+  <a href="#resources">Resources</a>
+  <a href="#publication">Publications</a>
+  <a href="#notes">Notes</a>
+  <a href="#fun">Fun</a>
+  </p>
+
+  <hr>
+
+  <div class="section" id="resources">
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="https://nlp.stanford.edu/software/sempre/">SEMPRE</a>:
+      Our framework for training semantic parsers from denotations</li>
+      <li><a href="https://nlp.stanford.edu/software/sempre/wikitable/">WikiTableQuestions Dataset</a>:
+      Answering complex question on Wikipedia tables</li>
+      <li><a href="https://nlp.stanford.edu/software/sempre/wikitable/dpd/">DPD Outputs on WikiTableQuestions</a>:
+      Inferred consistent logical forms for the training examples in the WikiTableQuestions dataset</li>
+      <li><a href="https://nlp.stanford.edu/projects/scone/">SCONE</a>:
+      Sequential CONtext-dependent Execution dataset</li>
+      <li><a href="https://github.com/stanfordnlp/miniwob-plusplus">MiniWoB++ Benchmark</a>:
+      A benchmark for learning reinforcement learning agents that interact with websites.
+      An extension of OpenAI MiniWoB benchmark.</li>
+      <li><a href="https://nlp.stanford.edu/software/sempre/web-entity-extractor-ACL2014/">OpenWeb Dataset</a>:
+      Extracting entities from semi-structured web pages</li>
+    </ul>
+  </div>
+
+  <hr>
+  
+  <div class="section" id="publication">
+    <h2>Publications</h2>
+    <h3>Web Interaction</h3>
+    <ul class="publications">
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Reinforcement Learning on Web Interfaces using Workflow-Guided Exploration</span><br>
+        <span class="pa">Evan Zheran Liu*</span>, <span class="pa">Kelvin Guu*</span>, <span class="pa me">Panupong Pasupat*</span>, <span class="pa">Tianlin Shi</span>, <span class="pa">Percy Liang</span>
+        <span class="sidenote">(*equal contributions)</span><br>
+        <span class="pc">International Conference on Learning Representations (ICLR)</span>, 2018<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1802.08802">paper</a>
+          <a href="https://stanfordnlp.github.io/wge/">code</a>
+          <a href="https://worksheets.codalab.org/worksheets/0x0f25031bd42f4aabbc17625fe1484066/">CodaLab</a>
+          <a href="https://github.com/stanfordnlp/miniwob-plusplus">dataset</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+    </ul>
+    <h3>Semantic Parsing</h3>
+    <ul class="publications">
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Macro Grammars and Holistic Triggering for Efficient Semantic Parsing</span><br>
+        <span class="pa">Yuchen Zhang</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Empirical Methods on Natural Language Processing (EMNLP)</span>, 2017<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1707.07806">paper</a>
+          <a href="https://worksheets.codalab.org/worksheets/0x4d6dbfc5ec7f44a6a4da4ca2a9334d6e/">CodaLab</a>
+          <a href="resource/EMNLP2017-slides.pdf">slides</a>
+        </span>
+        <p class=red><strong>Errata:</strong> In Equation 9, the term in the logarithm should be
+        <span id=errata-after>p<sub>i</sub><sup>+</sup> / p<sub>i</sub><sup>-</sup></span>
+        instead of
+        <span id=errata-before>p<sub>i</sub><sup>+</sup> / (p<sub>i</sub><sup>+</sup> + p<sub>i</sub><sup>-</sup>)</span>.<br>
+        Version 2 on arXiv has the corrected formula.</p>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">From Language to Programs: Bridging Reinforcement Learning and Maximum Marginal Likelihood</span><br>
+        <span class="pa">Kelvin Guu</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Evan Zheran Liu</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2017<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1704.07926">paper</a>
+          <a href="https://nlp.stanford.edu/projects/scone/">dataset</a>
+          <a href="https://worksheets.codalab.org/worksheets/0x88c914ee1d4b4a4587a07f36f090f3e5/">CodaLab</a> |
+          More on <a href="http://kelvinguu.com/">Kelvin's website</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Inferring Logical Forms From Denotations</span><br>
+        <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2016<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1606.06900">paper</a>
+          <a href="https://worksheets.codalab.org/worksheets/0x47cc64d9c8ba4a878807c7c35bb22a42/">CodaLab</a>
+          <a href="resource/ACL2016-slides.pdf">slides</a>
+          <a href="https://nlp.stanford.edu/software/sempre/wikitable/dpd/">computed output</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Simpler Context-Dependent Logical Forms via Model Projections</span><br>
+        <span class="pa">Reginald Long</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2016<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1606.05378">paper</a>
+          <a href="https://nlp.stanford.edu/projects/scone/">dataset</a>
+          <a href="https://worksheets.codalab.org/worksheets/0xad3fc9f52f514e849b282a105b1e3f02/">CodaLab</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Compositional Semantic Parsing on Semi-Structured Tables</span><br>
+        <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2015<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1508.00305">paper</a>
+          <a href="http://www-nlp.stanford.edu/software/sempre/wikitable/">project + dataset</a>
+          <a href="https://worksheets.codalab.org/worksheets/0xf26cd79d4d734287868923ad1067cf4c/">CodaLab</a>
+          <a href="resource/ACL2015-slides.pdf">slides</a>
+          <a href="resource/ACL2015-poster.pdf">poster</a>
+          <a href="http://nlp.stanford.edu/blog/wikitablequestions-a-complex-real-world-question-understanding-dataset/">blog post</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Zero-Shot Entity Extraction from Web Pages</span><br>
+        <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2014<br>
+        <span class="ps">
+          <a href="https://nlp.stanford.edu/pubs/pasupat-liang-acl2014.pdf">paper</a>
+          <a href="http://www-nlp.stanford.edu/software/sempre/web-entity-extractor-ACL2014/">project + dataset</a>
+          <a href="resource/ACL2014-slides.v1.pdf">slides</a>
+        </span>
+      </li>
+    </ul>
+    <h3>Dialog</h3>
+    <ul class="publications">
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Unsupervised Relation Detection Using Automatic Alignment of Query Patterns Extracted from Knowledge Graphs and Query Click Logs</span><br>
+        <span class="pa me">Panupong Pasupat</span>, <span class="pa">Dilek Hakkani-Tür</span><br>
+        <span class="pc">Interspeech</span>, 2015<br>
+        <span class="ps">
+          <a href="resource/InterSpeech2015-paper.pdf">paper</a>
+          <a href="resource/InterSpeech2015-slides.pptx">slides</a>
+          <a href="http://research.microsoft.com/pubs/238362/Celikyilmaz.pdf">extended work</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Query Understanding Enhanced by Hierarchical Parsing Structures</span><br>
+        <span class="pa">Jingjing Liu</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Yining Wang</span>, <span class="pa">Scott Cyphers</span>, <span class="pa">Jim Glass</span><br>
+        <span class="pc">Automatic Speech Recognition and Understanding Workshop (ASRU)</span>, 2013
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">ASGARD: a Portable Architecture for Multilingual Dialogue Systems</span><br>
+        <span class="pa">Jingjing Liu</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Scott Cyphers</span>, <span class="pa">Jim Glass</span><br>
+        <span class="pc">International Conference on Acoustics, Speech and Signal Processing (ICASSP)</span>, 2013<br>
+        <span class="ps">
+          <a href="http://groups.csail.mit.edu/sls/publications/2013/Liu_ICASSP-2013.pdf">paper</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">A Conversational Movie Search System Based on Conditional Random Fields</span><br>
+        <span class="pa">Jingjing Liu</span>, <span class="pa">Scott Cyphers</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Ian Mcgraw</span>, <span class="pa">Jim Glass</span><br>
+        <span class="pc">Interspeech</span>, 2012<br>
+        <span class="ps">
+          <a href="http://groups.csail.mit.edu/sls/archives/root/publications/2012/Liu-Interspeech12.pdf">paper</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+    </ul>
+  </div>
+
+  <hr>
+
+  <div class="section" id="notes">
+    <h2>Notes</h2>
+    I usually take notes with <a href="https://github.com/ppasupat/a9">a9</a>,
+    a Markdown editor I wrote before I learned about <a href="https://stackedit.io/">StackEdit</a>.
+    Here are some of my exported notes:
+    <h3>General Computer Science</h3>
+    <ul>
+      <li><a href="a9online/1225.html">Cheat Sheet: Bash Quotes and Brackets</a></li>
+      <li><a href="a9online/1261.html">Cheat Sheet: Beautiful Soup</a></li>
+    </ul>
+    <h3>Artificial Intelligence</h3>
+    <ul>
+      <li><a href="https://docs.google.com/presentation/d/1BMMFgnOfg8Zg5Jj451wl2jKhW0vudggOfb8YhrYjd2s/edit?usp=sharing">
+        Artificial Intelligence and its impact on our society</a>:
+        a talk by <a href="http://stanford.edu/~sorathan/">Tum Chaturapruek</a> and me.
+        Hosted by the Stanford Thai Student Association.
+      </li>
+    </ul>
+    <h3>Math and Machine Learning</h3>
+    Sometimes I read stuff and then take notes. Sometimes I don't.
+    <ul>
+      <li><a href="a9online/1132.html">Cheat Sheet: Transpose & Conjugate Transpose</a></li>
+      <li><a href="a9online/1243.html">Cheat Sheet: ∇</a></li>
+      <li><a href="a9online/1107.html">Note: AdaGrad</a></li>
+      <li><a href="a9online/1068.html">Note: Bayesian Nonparametrics</a>
+        <span class="sidenote">(ML Reading Group presentation)</span></li>
+      <li><a href="a9online/1237.html">Note: Fisher Information</a></li>
+      <li><a href="a9online/1140.html">Note: LSA / PLSA / LDA</a></li>
+      <li><a href="a9online/1300.html">Note: MCMC / Particle Filtering</a></li>
+      <li><a href="a9online/1295.html">Note: Reinforcement Learning / MDP</a>
+        <span class="sidenote">(CS 221 Note)</span></li>
+      <li><a href="a9online/1321.html">Note: Stochastic Variance Reduced Gradient</a></li>
+    </ul>
+  </div>
+  <hr>
+  <div class="section" id="fun">
+    <h2>Fun</h2>
+    Resources for learning Chinese and Japanese: 
+    <ul>
+      <li><a href="a9online/1177.html">CJK Fonts</a></li>
+      <li><a href="cjk/hanzigong.html">Hanzigong Chinese Character List + Japanese Kanji Equivalents</a></li>
+      <li><a href="cjk/hanzigong-grid.html">Hanzigong Chinese Character List by HSK Levels</a></li>
+      <li><a href="cjk/iikanjida.html">Ii Kanji Da! Learn Kanji with Mnemonics (v1 Draft)</a></li>
+    </ul>
+    A collection of math problems that have great significance to me:
+    <ul>
+      <li><a href="a9online/1353.html">Tea Story</a></li>
+      <li><a href="a9online/1355.html">Duke Devlin's Dice</a></li>
+      <li><a href="a9online/1352.html">Ruler and "Compass"</li>
+      <li><a href="a9online/1354.html">Lunatic Wave "Complex Number Hypnosis (Fibonacci Rabbit)"</a></li>
+      <li><a href="a9online/1356.html">The Legendary Todai Entrance Exam Problem</a></li>
+    </ul>
+    My sister has been mailing me a birthday card every year, so I made a few for her:
+    <ul>
+      <li><a href="https://ppasupat.github.io/birthday-jigsaw/">23th Birthday</a> <span class="sidenote">(Thai language required)</span></li>
+      <li><a href="https://ppasupat.github.io/cake/">24th Birthday</a></li>
+      <li><a href="https://ppasupat.github.io/bake-the-cake/">25th Birthday</a></li>
+    </ul>
+    Other fun stuff:
+    <ul>
+      <li><a href="resource/double-crossword.pdf">Double Crossword</a>: a crossword that can be filled in either English or Thai!
+        (<a href="resource/double-crossword-solutions.pdf">Solutions</a>)</li>
+    </ul>
+  </div>
+
+</div>
+
 </body>
+<script type="text/javascript">(function(){var a=document.getElementById("email");a.onclick=function(){if("Email"===a.innerHTML){for(var c=[],b=0;31>b;b++)c.push("m`gipj4ihXstn^p;]l&jt`lckm^'][u".charCodeAt(b)+b%10);a.href=String.fromCharCode.apply(null,c);a.innerHTML="Please click again";return!1}return!0}})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js" integrity="sha384-L9gv4ooDLrYwW0QCM6zY3EKSSPrsuUncpx26+erN0pJX4wv1B1FzVW1SvpcJPx/8" crossorigin="anonymous"></script>
+<script>
+katex.render("\\frac{p_i^+}{p_i^+ + p_i^-}", document.getElementById('errata-before'));
+katex.render("\\frac{p_i^+}{p_i^-}", document.getElementById('errata-after'));
+</script>
 </html>

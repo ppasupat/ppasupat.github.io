@@ -1,0 +1,141 @@
+/* Global */
+html {
+  height: 100%;
+  font-size: 12pt;
+}
+
+body {
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  background: #FAFAFC;
+  margin: 0;
+  line-height: 1.4;
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: #33B;
+}
+a:hover{
+  text-decoration: underline;
+}
+
+.centerize {
+  text-align: center;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.red {
+  color: #A00;
+}
+
+ul ul {
+  margin-top: .3em;
+}
+
+/* Layout */
+
+#wrapper {
+  margin: 0 auto;
+  padding: 2em 0.5em 3em;
+  max-width: 700px;
+}
+
+#header {
+  padding: 0;
+  width: 100%;
+  position: relative;
+}
+
+#header-photo {
+  position: absolute;
+  width: 150px;
+  padding: 15px;
+}
+
+#header-info {
+  margin-left: 180px;
+  padding: 0.5em 1em;
+}
+
+#header-info p, #info p{
+  margin: 0.3em 0;
+}
+
+@media (max-width: 500px) {
+  #header-photo {
+    position: relative;
+    width: auto;
+    text-align: center;
+  }
+  #header-info {
+    margin-left: 0;
+    padding-top: 0;
+    text-align: center;
+  }
+}
+
+#photo {
+  width: 150px;
+}
+
+.section {
+  margin: 2em 1em;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #DDD;
+  margin: 1em 0;
+  padding: 0; 
+}
+
+li {
+  margin-bottom: .3em;
+}
+
+/* Publications */
+
+ul.publications li {
+  margin-bottom: 1.2em;
+}
+
+.pt {
+  font-weight: bold;
+  color: #250;
+}
+
+.pa {
+  color: #520;
+}
+
+.pc {
+  font-style: italic;
+}
+
+.pd {
+  
+}
+
+.ps a {
+  display: inline-block;
+  border: solid 1px #AAA;
+  padding: 0.05em 0.4em;
+  margin: 0.3em 0.2em;
+  border-radius: 0.5em;
+  text-decoration: none;
+  background-color: #EEE;
+  color: #222;
+}
+
+.ps a:hover {
+  background-color: #F9F9F9;
+}
+
+.sidenote {
+  font-size: 70%;
+}

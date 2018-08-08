@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>[022] DP: Stick-Breaking Process Viewpoint</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="[022] DP: Stick-Breaking Process Viewpoint">[022] DP: Stick-Breaking Process Viewpoint</div>
+      <div id="content">
+<h1 id="stick-breaking-process">Stick-Breaking Process</h1>
+<p><strong>Stick-Breaking Process</strong> is a method for sampling a distribution $G$ from $\Mr{DP}(\alpha, H)$.</p>
+<p><strong><em>Definition</em></strong> Given $H$ and $\alpha &gt; 0$, sample $\pi = (\pi_1, \pi_2, \dots)$ as follows</p>
+<ul>
+<li>$\beta_k \sim \Mr{Beta}(1,\alpha)$ (Beta distribution = Dirichlet with 2 variables)</li>
+<li>$\pi_k = (1-\beta_1)\dots(1-\beta_{k-1})\beta_k = \nail{1 - \pi_1 - \dots - \pi_{k-1}}\beta_k$</li>
+</ul>
+<p>We write $\pi \sim \Mr{GEM}(\alpha)$ where GEM stands for Griffiths, Engen and McCloskey. Graphically,</p>
+<svg fill="white" stroke="black" width="250" height="180">
+<g transform="translate(240,30)">
+    <line x1="0" y1="-5" x2="0" y2="5"></line>
+    <line x1="0" y1="0" x2="-230" y2="0"></line>
+    <line x1="-230" y1="-5" x2="-230" y2="5"></line>
+    <line x1="-150" y1="-5" x2="-150" y2="5"></line>
+    <g transform="translate(-187,-15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\beta_1$</div></foreignObject></g>
+    <g transform="translate(-150,-15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">:</div></foreignObject></g>
+    <g transform="translate(-75,-15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$1 - \beta_1$</div></foreignObject></g>
+</g>
+<g transform="translate(240,65)">
+    <line x1="0" y1="-5" x2="0" y2="5"></line>
+    <line x1="0" y1="0" x2="-150" y2="0"></line>
+    <line x1="-150" y1="-5" x2="-150" y2="5"></line>
+    <line x1="-100" y1="-5" x2="-100" y2="5"></line>
+    <g transform="translate(-125,-15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\beta_2$</div></foreignObject></g>
+    <g transform="translate(-100,-15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">:</div></foreignObject></g>
+    <g transform="translate(-50,-15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$1 - \beta_2$</div></foreignObject></g>
+</g>
+<g transform="translate(240,100)">
+    <line x1="0" y1="-5" x2="0" y2="5"></line>
+    <line x1="0" y1="0" x2="-100" y2="0"></line>
+    <line x1="-100" y1="-5" x2="-100" y2="5"></line>
+    <line x1="-70" y1="-5" x2="-70" y2="5"></line>
+    <g transform="translate(-85,-15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\beta_3$</div></foreignObject></g>
+    <g transform="translate(-70,-15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">:</div></foreignObject></g>
+    <g transform="translate(-35,-15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$1 - \beta_3$</div></foreignObject></g>
+</g>
+<g transform="translate(200,125)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\vdots$</div></foreignObject></g>
+<g transform="translate(240,150)" stroke="blue">
+    <line x1="0" y1="-5" x2="0" y2="5"></line>
+    <line x1="0" y1="0" x2="-230" y2="0"></line>
+    <line x1="-230" y1="-5" x2="-230" y2="5"></line>
+    <line x1="-150" y1="-5" x2="-150" y2="5"></line>
+    <line x1="-100" y1="-5" x2="-100" y2="5"></line>
+    <line x1="-70" y1="-5" x2="-70" y2="5"></line>
+    <line x1="-30" y1="-5" x2="-30" y2="5"></line>
+    <line x1="-20" y1="-5" x2="-20" y2="5"></line>
+    <line x1="-6" y1="-5" x2="-6" y2="5"></line>
+    <g transform="translate(-187,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\pi_1$</div></foreignObject></g>
+    <g transform="translate(-125,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\pi_2$</div></foreignObject></g>
+    <g transform="translate(-85,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\pi_3$</div></foreignObject></g>
+    <g transform="translate(-50,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\pi_4$</div></foreignObject></g>
+    <g transform="translate(-15,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\cdots$</div></foreignObject></g>
+</g>
+</svg>
+
+<p><strong><em>Algorithm</em></strong> To sample $G$ from $\Mr{DP}(\alpha, H)$,</p>
+<ul>
+<li>Sample $\pi \sim \Mr{GEM}(\alpha)$</li>
+<li>Sample $\theta_j \sim H(\lambda)$ for all $j = 1, 2, \dots$</li>
+<li>Let
+  $$G = \sum_{j=1}^\infty \pi_j\delta_{\theta_j}$$</li>
+</ul>
+<p><strong><em>Theorem</em></strong> The $G$ above satisfies $G\sim \Mr{DP}(\alpha, H)$. Conversely, samples from $\Mr{DP}(\alpha, H)$ will have a representation as described above.</p>
+<h1 id="predictive-distribution">Predictive Distribution</h1>
+<p>Since the distribution $G \sim \Mr{DP}(\alpha, H)$ looks like</p>
+<svg fill="white" stroke="black" width="250" height="50">
+<g transform="translate(240,15)" stroke="blue">
+    <line x1="0" y1="-5" x2="0" y2="5"></line>
+    <line x1="0" y1="0" x2="-230" y2="0"></line>
+    <line x1="-230" y1="-5" x2="-230" y2="5"></line>
+    <line x1="-150" y1="-5" x2="-150" y2="5"></line>
+    <line x1="-100" y1="-5" x2="-100" y2="5"></line>
+    <line x1="-70" y1="-5" x2="-70" y2="5"></line>
+    <line x1="-30" y1="-5" x2="-30" y2="5"></line>
+    <line x1="-20" y1="-5" x2="-20" y2="5"></line>
+    <line x1="-6" y1="-5" x2="-6" y2="5"></line>
+    <g transform="translate(-187,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\pi_1$</div></foreignObject></g>
+    <g transform="translate(-125,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\pi_2$</div></foreignObject></g>
+    <g transform="translate(-85,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\pi_3$</div></foreignObject></g>
+    <g transform="translate(-50,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\pi_4$</div></foreignObject></g>
+    <g transform="translate(-15,15)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\cdots$</div></foreignObject></g>
+</g>
+</svg>
+
+<p>where $\pi_j = \prob{\text{drawing }\theta_j\text{ from }G}$, there is a decent chance to draw the same $\theta$ repeatedly. Indeed, suppose</p>
+<ul>
+<li>$\bar{\theta}_1, \dots, \bar{\theta}_N$ are independent samples from $G$</li>
+<li>$\theta_1, \dots, \theta_K$ are the <em>distinct</em> observations among those $N$ samples ($K \leq N$)</li>
+</ul>
+<p>If we consider the posterior
+$$\ex{G(A)\midd \bar{\theta}_1, \dots, \bar{\theta}_N} = \frac{1}{\alpha + N}\nail{\alpha H(A) + \sum_{i=1}^N\delta_{\bar\theta_i}(A)}$$
+and shrink $A$ to a single point $\theta$, we get
+$$\begin{align*}
+\prob{\bar{\theta}_{N+1} = \theta\midd \bar{\theta}_1, \dots, \bar{\theta}_N}
+&amp;= \frac{1}{\alpha + N}\nail{\alpha h(\theta) + \sum_{i=1}^N\delta(\bar\theta_i, \theta)} \\
+&amp;= \frac{1}{\alpha + N}\nail{\alpha h(\theta) + \sum_{k}N_k\delta(\theta_k, \theta)}
+\end{align*}$$
+where $N_k$ is the number of times we saw $\theta_k$. Therefore,
+$$\begin{align*}
+\prob{\bar{\theta}_{N+1} = \text{seen }\theta_k\midd \text{previous draws}} = \frac{N_k}{\alpha + N} \\
+\prob{\bar{\theta}_{N+1} = \text{unseen value}\midd \text{previous draws}} = \frac{\alpha}{\alpha + N} \\
+\end{align*}$$</p>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:46:47.780391</div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>AdaGrad - Adaptive Subgradient Methods</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="AdaGrad - Adaptive Subgradient Methods">AdaGrad - Adaptive Subgradient Methods</div>
+      <div id="content">
+<p><strong>AdaGrad</strong> is an optimization method that allows different step sizes for different features. It increases the influence of rare but informative features.</p>
+<h1 id="setup">Setup</h1>
+<p>Let $f:\RR^n\to\RR$ be a convex function and $\Mc{X}\subseteq\RR^n$ be a convex compact subset of $\RR^n$. We want to optimize
+$$\min_{x\in\Mc{X}} f(x)$$</p>
+<p>There is a tradeoff between convergence rate and computation time. <strong>Second-order methods</strong> (e.g. BFGS) have convergence rate $O(1/e^T)$ but need $O(n^3)$ computation time. We will focus on <strong>first-order methods</strong>, which need only $O(n)$ computation time. (In machine learning, speed is more important than fine-grained accuracy.)</p>
+<h1 id="proximal-point-algorithm-gradient-descent-">Proximal Point Algorithm (Gradient Descent)</h1>
+<p>In <strong>proximal point algorithm</strong>, we repeatedly take small steps until we reach the optimum. If $f$ is differentiable, we estimate $f(y)$ with
+$$f(y) \approx f(x) + \ang{\nabla f(x), y-x}$$</p>
+<p>The update rule is
+$$\begin{align*}
+x^{(k+1)}
+&amp;= \argmin_{x\in\Mc{X}}\crow{f(x\k) + \ang{\nabla f(x\k), x-x\k} + \frac{1}{2\alpha_k}\norm{x-x\k}_2^2} \\
+&amp;= \argmin_{x\in\Mc{X}}\crow{\ang{\nabla f(x\k),x} + \frac{1}{2\alpha_k}\norm{x-x\k}_2^2}
+\end{align*}$$</p>
+<p>We regularize with step size $\alpha_k$ (usually constant in batch descent) to ensure that $x^{(k+1)}$ is not too far from $x\k$. For $\Mc{X} = \RR^n$ (unconstrained optimization), solving for optimal $x$ gives
+$$x^{(k+1)} = x\k - \alpha\nabla f(x\k)$$</p>
+<p>The convergence rate is $O(1/T)$. See the proof in the Note.</p>
+<h1 id="stochastic-gradient-descent">Stochastic Gradient Descent</h1>
+<p>Suppose $f$ can be decomposed into
+$$f(x) = \frac{1}{N}\sum_{i=1}^N F(x,a_i)$$
+where $a_i \in\RR^n$ are data points. If $N$ is large, calculating $\nabla f(x)$ becomes expensive. Instead, we approximate
+$$\nabla f(x\k) \approx g\k := \nabla F(x\k,a_i) \quad\text{ where }\quad i \xleftarrow{\text{random}} \set{1,\dots,N}$$
+<strong>Stochastic gradient descent</strong> uses the update rule
+$$x^{(k+1)} = \argmin_{x\in\Mc{X}}\crow{\ang{g\k,x} + \frac{1}{2\alpha_k}\norm{x-x\k}_2^2}$$</p>
+<p>If $i$ is uniformly random, $\ex{g\k\mid x\k} = \nabla f(x\k)$, so the estimate is unbiased. However, we should decrease $\alpha_k$ over time (strengthen regularization) to prevent the noisy $g\k$ from ruining the already-good $x\k$.</p>
+<p>The convergence rate is $O(1/\sqrt{T})$. See the proof in the Note.</p>
+<h1 id="improving-the-regularizer">Improving the Regularizer</h1>
+<p>Consider the problem
+$$\min_{x\in\RR^2} 100x_1^2 + x_2^2$$</p>
+<p>Gradient descent converges slowly because the L2 norm $\norm{x-x\k}_2^2$ in the regularizer does not match the geometry of the problem, where changing $x_1$ has much more effect than changing $x_2$.</p>
+<p>Instead, let's use the <strong>matrix norm</strong>. For a positive definite matrix $B$, define
+$$\norm{x}_B^2 := x\trps Bx \geq 0$$
+For simplicity, let $B$ be a diagonal matrix with positive terms. So
+$$\norm{x}_B^2 := \sum_j b_{jj}x_j^2 \geq 0$$</p>
+<p>The update rule becomes
+$$\begin{align*}
+x^{(k+1)} 
+&amp;= \argmin_{x\in\Mc{X}}\crab{\ang{\nabla f(x\k),x} + \frac{1}{2\alpha_k}\norm{x-x\k}_B^2} \\
+&amp;= x\k - \alpha B^{-1} \nabla f(x\k) \qquad(\text{if } \Mc{X} = \RR^n)
+\end{align*}$$</p>
+<p>If $f(x) = \frac{1}{2}x\trps Ax$ for some $A$, then by choosing $B = A$ or something similar to $A$, the method converges very quickly. In practice, however, picking such $B$ can be difficult or impossible (e.g. online setting), so we need to estimate $B$ as the method progresses.</p>
+<p><strong><em>Idea</em></strong> Use the previously computed gradients $g_k$ to estimate the geometry.
+$$\text{large } \fracp{f}{x_j} \iff \text{large }A_{jj} \iff \text{large }B_{jj}$$</p>
+<p>Another intuition is that we should care more about rare features. For rare features (small accumulative gradient), we should regularize less (use small $B_{jj}$).</p>
+<p><strong>AdaGrad</strong> is an extension of SGD. In iteration $k$, define
+$$G^{(k)} = \Mr{diag}\crab{\sum_{i=1}^k g\i (g\i)\trps}^{1/2}$$
+i.e., let $G\k$ be a diagonal matrix with entries
+$$G^{(k)}_{jj} = \sqrt{\sum_{i=1}^k (g\i_j)^2}$$
+and use the update rule
+$$\begin{align*}
+x^{(k+1)}
+&amp;= \argmin_{x\in\Mc{X}}\crow{\ang{\nabla f(x\k), x} + \frac{1}{2\alpha}\norm{x-x\k}_{G\k}^2} \\
+&amp;= x\k - \alpha G^{-1}\nabla f(x\k) \qquad(\text{if }\Mc{X} = \RR^n)
+\end{align*}$$</p>
+<p>The convergence rate is $O(1/\sqrt{T})$ but with a better constant depending on the geometry. See the proof in the Note.</p>
+<h1 id="reference">Reference</h1>
+<p><strong><em>Paper</em></strong> <a target="_blank" href="http://stanford.edu/~jduchi/projects/DuchiHaSi10_colt.pdf">http://stanford.edu/~jduchi/projects/DuchiHaSi10_colt.pdf</a></p>
+<p><strong><em>Slides</em></strong> <a target="_blank" href="https://web.stanford.edu/~jduchi/projects/DuchiHaSi12_ismp.pdf">https://web.stanford.edu/~jduchi/projects/DuchiHaSi12_ismp.pdf</a></p>
+<ul>
+<li><a target="_blank" href="uploads/proximal_notes.pdf">ML Reading Group: Proximal Note</a></li>
+</ul>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:51:51.325314</div>
+    </div>
+  </div>
+</body>
+
+</html>

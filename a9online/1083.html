@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>[023] DP: Chinese Restaurant Process Viewpoint</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="[023] DP: Chinese Restaurant Process Viewpoint">[023] DP: Chinese Restaurant Process Viewpoint</div>
+      <div id="content">
+<h1 id="infinite-mixture-models">Infinite Mixture Models</h1>
+<p>Let's return to the mixture models.</p>
+<svg fill="white" stroke="black" width="460" height="240">
+<g transform="translate(0,20)">
+    <g transform="translate(100,40)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\pi$</div></foreignObject></g>
+    <g transform="translate(65,70)"><rect fill="white" height="120" width="70" y="0" x="0"></rect><foreignObject height="120" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 114px; text-align: right; vertical-align: bottom; padding: 3px;">$N$</div></foreignObject></g>
+    <g transform="translate(145,70)"><rect fill="white" height="60" width="70" y="0" x="0"></rect><foreignObject height="60" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 54px; text-align: right; vertical-align: bottom; padding: 3px;">$K$</div></foreignObject></g>
+    <g transform="translate(40,20)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\alpha$</div></foreignObject></g>
+    <g transform="translate(40,60)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$K$</div></foreignObject></g>
+    <g transform="translate(100,100)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$z_i$</div></foreignObject></g>
+    <g transform="translate(100,160)"><circle fill="lightgray" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$x_i$</div></foreignObject></g>
+    <g transform="translate(180,100)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\theta_j$</div></foreignObject></g>
+    <g transform="translate(180,40)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\lambda$</div></foreignObject></g>
+    <g><line stroke="black" y2="34.94035574373059" x2="84.82106723119178" y1="24.666666666666664" x1="54"></line><polygon transform="translate(84.82106723119178,34.94035574373059) rotate(18.43494882292201)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+    <g><line stroke="black" y2="45.05964425626941" x2="84.82106723119178" y1="55.333333333333336" x1="54"></line><polygon transform="translate(84.82106723119178,45.05964425626941) rotate(-18.43494882292201)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+    <g><line stroke="black" y2="84" x2="100" y1="56" x1="100"></line><polygon transform="translate(100,84) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+    <g><line stroke="black" y2="144" x2="100" y1="116" x1="100"></line><polygon transform="translate(100,144) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+    <g><line stroke="black" y2="84" x2="180" y1="54" x1="180"></line><polygon transform="translate(180,84) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+    <g><line stroke="black" y2="150.4" x2="112.8" y1="109.6" x1="167.2"></line><polygon transform="translate(112.8,150.4) rotate(143.13010235415598)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+</g>
+<g transform="translate(260,0)">
+    <g transform="translate(100,80)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$G$</div></foreignObject></g>
+    <g transform="translate(65,110)"><rect fill="white" height="120" width="70" y="0" x="0"></rect><foreignObject height="120" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 114px; text-align: right; vertical-align: bottom; padding: 3px;">$N$</div></foreignObject></g>
+    <g transform="translate(100,20)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$H$</div></foreignObject></g>
+    <g transform="translate(40,80)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\alpha$</div></foreignObject></g>
+    <g transform="translate(100,140)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\bar\theta_i$</div></foreignObject></g>
+    <g transform="translate(100,200)"><circle fill="lightgray" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$x_i$</div></foreignObject></g>
+    <g><line stroke="black" y2="64" x2="100" y1="34" x1="100"></line><polygon transform="translate(100,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+    <g><line stroke="black" y2="80" x2="84" y1="80" x1="54"></line><polygon transform="translate(84,80) rotate(0)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+    <g><line stroke="black" y2="124" x2="100" y1="96" x1="100"></line><polygon transform="translate(100,124) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+    <g><line stroke="black" y2="184" x2="100" y1="156" x1="100"></line><polygon transform="translate(100,184) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+</g>
+</svg>
+
+<p>The relationship between the 2 models is $\bar\theta_i$ = $\theta_{z_i}$.</p>
+<p>In the model on the right,</p>
+<ul>
+<li>$\Theta = \set{\theta_1, \dots, \theta_K}$</li>
+<li>$G(\theta) = \sum_{j=1}^K\pi_j\delta(\theta,\theta_j)$</li>
+<li>$\bar\theta_i \sim G$</li>
+</ul>
+<p>We have extended the model on the right to the infinite space $\Theta$:</p>
+<ul>
+<li>$\Theta = \set{\text{all possible }\theta\text{'s}}$</li>
+<li>$G(\theta) = \sum_{j=1}^\infty\pi_j\delta(\theta,\theta_j)$</li>
+<li>$\bar\theta_i \sim G$</li>
+</ul>
+<p>Since viewing the clusters in terms of $z_i$ is useful, let's convert back to the model on the left. Our plan is to show a way to sample $z_i$'s and argue that the predictive probability distribution matches the one from Dirichlet process.</p>
+<h1 id="chinese-restaurant-process">Chinese Restaurant Process</h1>
+<p>Pitman and Dubins named this process after seeing super huge Chinese restaurants in San Francisco's Chinatown.</p>
+<p><strong><em>Definition</em></strong> (Chinese Restaurant Process) Imagine an infinite number of tables labeled $1, 2, \dots$. Customers come in one by one.</p>
+<ul>
+<li>Customer #1 sits at table 1.</li>
+<li>Customer #$i$ sits at:<ul>
+<li>an occupied table $j$ with probability $\propto$ the number of people in table $j$, or</li>
+<li>the first unoccupied table with probability $\propto \alpha$</li>
+</ul>
+</li>
+<li>If any customer sits at an empty table $j$, the customer orders food $\theta_j \sim H$ to be shared in the table.</li>
+</ul>
+<p>If customer #$i$ sits at table $j$, we let $z_i = j$ and $\bar\theta_i = \theta_j$.</p>
+<svg fill="white" stroke="black" width="420" height="530">
+<g transform="translate(20,40)">
+    <g transform="translate(0,0)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">1</div></foreignObject></g>
+    <g transform="translate(80,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{\alpha}{\alpha}$</div></foreignObject></g>
+    <g transform="translate(160,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(240,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(320,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(380,0)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">...</div></foreignObject></g>
+</g>
+<g transform="translate(20,140)">
+    <g transform="translate(0,0)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">2</div></foreignObject></g>
+    <g transform="translate(80,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{1}{1+\alpha}$</div></foreignObject></g>
+    <g transform="translate(160,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{\alpha}{1+\alpha}$</div></foreignObject></g>
+    <g transform="translate(240,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(320,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(380,0)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">...</div></foreignObject></g>
+    <g transform="translate(80,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">1</div></foreignObject></g>
+</g>
+<g transform="translate(20,240)">
+    <g transform="translate(0,0)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">3</div></foreignObject></g>
+    <g transform="translate(80,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{1}{2+\alpha}$</div></foreignObject></g>
+    <g transform="translate(160,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{1}{2+\alpha}$</div></foreignObject></g>
+    <g transform="translate(240,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{\alpha}{2+\alpha}$</div></foreignObject></g>
+    <g transform="translate(320,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(380,0)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">...</div></foreignObject></g>
+    <g transform="translate(80,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">1</div></foreignObject></g>
+    <g transform="translate(160,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">2</div></foreignObject></g>
+</g>
+<g transform="translate(20,340)">
+    <g transform="translate(0,0)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">4</div></foreignObject></g>
+    <g transform="translate(80,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{1}{3+\alpha}$</div></foreignObject></g>
+    <g transform="translate(160,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{2}{3+\alpha}$</div></foreignObject></g>
+    <g transform="translate(240,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{\alpha}{3+\alpha}$</div></foreignObject></g>
+    <g transform="translate(320,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(380,0)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">...</div></foreignObject></g>
+    <g transform="translate(80,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">1</div></foreignObject></g>
+    <g transform="translate(148,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">2</div></foreignObject></g>
+    <g transform="translate(172,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">3</div></foreignObject></g>
+</g>
+<g transform="translate(210,420)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">$\vdots$</div></foreignObject></g>
+<g transform="translate(20,470)">
+    <g transform="translate(0,0)"><rect fill="white" height="20" width="40" y="-10" x="-20"></rect><foreignObject height="20" width="40" y="-10" x="-20"><div style="line-height: 20px; text-align: center;">N+1</div></foreignObject></g>
+    <g transform="translate(80,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(160,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{N_j}{N+\alpha}$</div></foreignObject></g>
+    <g transform="translate(240,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(320,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">$\displaystyle\frac{\alpha}{N+\alpha}$</div></foreignObject></g>
+    <g transform="translate(380,0)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">...</div></foreignObject></g>
+    <g transform="translate(160,40)"><foreignObject height="30" width="100" y="-15" x="-50"><div style="line-height: 30px; text-align: center;">occupied table</div></foreignObject></g>
+    <g transform="translate(320,40)"><foreignObject height="30" width="100" y="-15" x="-50"><div style="line-height: 30px; text-align: center;">empty table</div></foreignObject></g>
+</g>
+</svg>
+
+<p>Let $N_j$ be the number of people at table $j$. For customer #($n+1$), we have
+$$\begin{align*}
+\prob{\text{choose table }j} &amp;= \frac{N_j}{\alpha + N} \\
+\prob{\text{choose a new table}} &amp;= \frac{\alpha}{\alpha + N}
+\end{align*}$$
+which matches the predictive probability from Dirichlet process.</p>
+<p>Interestingly, CRP also shows us that $z_i$ are exchangeable; i.e., we can shuffle the order of the customers. For example,</p>
+<svg fill="white" stroke="black" width="400" height="100">
+<g transform="translate(50,40)">
+    <g transform="translate(0,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">1</div></foreignObject></g>
+    <g transform="translate(80,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">2</div></foreignObject></g>
+    <g transform="translate(160,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">3</div></foreignObject></g>
+    <g transform="translate(240,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(300,0)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">...</div></foreignObject></g>
+    <g transform="translate(-12,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">1</div></foreignObject></g>
+    <g transform="translate(12,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">2</div></foreignObject></g>
+    <g transform="translate(56,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">3</div></foreignObject></g>
+    <g transform="translate(80,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">4</div></foreignObject></g>
+    <g transform="translate(104,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">5</div></foreignObject></g>
+    <g transform="translate(160,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">6</div></foreignObject></g>
+</g>
+</svg>
+
+<p>The probability of the configuration above is
+$$\frac{\alpha}{\alpha}
+\cdot\frac{1}{\alpha+1}
+\cdot\frac{\alpha}{\alpha+2}
+\cdot\frac{1}{\alpha+3}
+\cdot\frac{2}{\alpha+4}
+\cdot\frac{\alpha}{\alpha+5}$$
+If we shuffle the customer and get a new configuration:</p>
+<svg fill="white" stroke="black" width="400" height="100">
+<g transform="translate(50,40)">
+    <g transform="translate(0,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">1</div></foreignObject></g>
+    <g transform="translate(80,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">2</div></foreignObject></g>
+    <g transform="translate(160,0)"><circle fill="white" r="30"></circle><foreignObject height="60" width="60" y="-30" x="-30"><div style="line-height: 60px; text-align: center;">3</div></foreignObject></g>
+    <g transform="translate(240,0)"><circle fill="white" r="30"></circle></g>
+    <g transform="translate(300,0)"><foreignObject height="30" width="60" y="-15" x="-30"><div style="line-height: 30px; text-align: center;">...</div></foreignObject></g>
+    <g transform="translate(-12,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">1</div></foreignObject></g>
+    <g transform="translate(12,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">5</div></foreignObject></g>
+    <g transform="translate(56,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">2</div></foreignObject></g>
+    <g transform="translate(80,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">3</div></foreignObject></g>
+    <g transform="translate(104,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">6</div></foreignObject></g>
+    <g transform="translate(160,42)"><rect fill="white" height="20" width="20" y="-10" x="-10"></rect><foreignObject height="20" width="20" y="-10" x="-10"><div style="line-height: 20px; text-align: center;">4</div></foreignObject></g>
+</g>
+</svg>
+
+<p>The probability of the new configuration is
+$$\frac{\alpha}{\alpha}
+\cdot\frac{\alpha}{\alpha+1}
+\cdot\frac{1}{\alpha+2}
+\cdot\frac{\alpha}{\alpha+3}
+\cdot\frac{1}{\alpha+4}
+\cdot\frac{2}{\alpha+5}$$
+We can see that the two probabilities are equal.</p>
+<p>Finally, we get a graphical model</p>
+<svg fill="white" stroke="black" width="220" height="175">
+<g transform="translate(100,20)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\pi$</div></foreignObject></g>
+<g transform="translate(65,50)"><rect fill="white" height="120" width="70" y="0" x="0"></rect><foreignObject height="120" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 114px; text-align: right; vertical-align: bottom; padding: 3px;">$N$</div></foreignObject></g>
+<g transform="translate(145,50)"><rect fill="white" height="60" width="70" y="0" x="0"></rect><foreignObject height="60" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 54px; text-align: right; vertical-align: bottom; padding: 3px;">$\infty$</div></foreignObject></g>
+<g transform="translate(40,20)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\alpha$</div></foreignObject></g>
+<g transform="translate(100,80)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$z_i$</div></foreignObject></g>
+<g transform="translate(100,140)"><circle fill="lightgray" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$x_i$</div></foreignObject></g>
+<g transform="translate(180,80)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\theta_j$</div></foreignObject></g>
+<g transform="translate(180,20)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\lambda$</div></foreignObject></g>
+<g><line stroke="black" y2="19.999999999999996" x2="84" y1="20" x1="54"></line><polygon transform="translate(84,19.999999999999996) rotate(0)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="64" x2="100" y1="36" x1="100"></line><polygon transform="translate(100,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="124" x2="100" y1="96" x1="100"></line><polygon transform="translate(100,124) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="64" x2="180" y1="34" x1="180"></line><polygon transform="translate(180,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="130.4" x2="112.8" y1="89.6" x1="167.2"></line><polygon transform="translate(112.8,130.4) rotate(143.13010235415598)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+</svg>
+
+<p>To sample $x_i$'s:</p>
+<ol>
+<li>$\pi \sim \Mr{GEM}(\alpha)$</li>
+<li>$z_i \sim \pi$</li>
+<li>$\theta_j \sim H(\lambda)$</li>
+<li>$x_i \sim F(\theta_{z_i})$</li>
+</ol>
+<p>Alternatively, the first 3 steps can be sampled using CRP.</p>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:46:56.425984</div>
+    </div>
+  </div>
+</body>
+
+</html>

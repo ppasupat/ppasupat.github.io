@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>[011] Exchangeability</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="[011] Exchangeability">[011] Exchangeability</div>
+      <div id="content">
+<h1 id="exchangeability">Exchangeability</h1>
+<p>In many applications, the <strong>order</strong> of observations does not matter. (For example, training instances can be permuted without changing the probability distribution; words in the bag-of-words model can be permuted)</p>
+<p>Formally,</p>
+<p><strong><em>Definition</em></strong> Random variables $(y_1, \dots, y_N)$ are <strong>exchangeable</strong> if for all permutations $\tau$, $$\prob{y_1, \dots, y_N} = \prob{y_{\tau(1)}, \dots, y_{\tau(N)}}$$</p>
+<p><strong><em>Definition</em></strong> Sequence $\{y_i\}_\infty$ is <strong>infinitely exchangeable</strong> if any finite subsequence is exchangeable.</p>
+<h1 id="de-finetti-s-theorem">De Finetti's Theorem</h1>
+<p>If $y_1, y_2, \dots$ are exchangeable, then the probability distribution $\prob{y_1, y_2, \dots}$ can be described succinctly due to the following theorem.</p>
+<p><strong><em>Theorem</em></strong> (De Finetti) If $\{y_i\}_\infty$ is infinitely exchangeable where $y_i \in Y$, then there exists some <strong>parameter space</strong> $\Phi$ and density function $\prob{\phi}$ such that for any $N$ observations,
+$$\prob{y_1, \dots, y_N} = \int_\Phi \prob{\phi}\prod_{i=1}^N\prob{y_i\mid\phi}\,d\phi$$</p>
+<p>In other words, we can always draw a graphical model:</p>
+<svg fill="white" stroke="black" width="100" height="120">
+<g transform="translate(50,20)"><circle fill="white" r="16"></circle><foreignObject height="32" width="20" y="-16" x="-10"><div style="line-height: 32px; text-align: center;">$\phi$</div></foreignObject></g>
+<g transform="translate(15,45)"><rect fill="white" height="70" width="70" y="0" x="0"></rect><foreignObject height="70" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 64px; text-align: right; vertical-align: bottom; padding: 3px;">$N$</div></foreignObject></g>
+<g transform="translate(50,80)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$y_i$</div></foreignObject></g>
+<g><line stroke="black" y2="64" x2="50" y1="36" x1="50"></line><polygon transform="translate(50,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+</svg>
+
+<p>If $Y$ is finite, then $\Phi$ has finite dimension, and we can <strong>parameterize</strong>. (For example, if $Y$ is Bernoulli, then we only need 1 parameter $\phi\in[0,1]$).</p>
+<p>However, if $Y$ is infinite, $\Phi$ has infinite dimension and cannot be parameterized by a finite amount of parameters.</p>
+<p>This is the motivation for using <strong>nonparametric methods</strong> which do not assume the (finite) number of parameters.</p>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:46:24.022927</div>
+    </div>
+  </div>
+</body>
+
+</html>

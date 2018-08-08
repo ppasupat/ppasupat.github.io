@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>Stochastic Variance Reduced Gradient</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="Stochastic Variance Reduced Gradient">Stochastic Variance Reduced Gradient</div>
+      <div id="content">
+<p><strong>Stochastic Variance Reduced Gradient</strong> (<strong>SVRG</strong>) is a method for making gradient descent converge faster by reducing the variance.</p>
+<h1 id="gradient-descent">Gradient Descent</h1>
+<p>We want to minimize the objective function
+$$P(w) = \frac{1}{n} \sum_{i=1}^n \psi_i(w)$$</p>
+<p>The simplest method is to use <strong>batch gradient descent</strong>:
+$$w^{(t)} = w^{(t-1)} - \frac{\eta_t}{n}\sum_{i=1}^n\nabla \psi_i(w^{(t-1)})$$
+In good conditions (e.g., $\psi_i$ is smooth and convex while $P$ is strongly convex), then we can choose a constant $\eta$ and get a convergence rate of $O(c^T)$ (i.e., needs $O(\log 1/\epsilon)$ iterations to get to $\epsilon$ error rate).</p>
+<p><strong><em>Note</em></strong> The rate of $O(c^T)$ is usually called <strong>linear convergence</strong> because it looks linear on a semi-log plot. <em>Who in the world named this!</em></p>
+<p>However, the sum is expensive to compute. To save time, we can use <strong>stochastic gradient descent</strong>:
+$$w^{(t)} = w^{(t-1)} - \eta_t\nabla \psi_{i_t}(w^{(t-1)})$$
+where $i_t \in \set{1,\dots,n}$ is chosen randomly in each iteration.</p>
+<p>The term $\phi_{i_t}(w^{(t-1)})$ maintains the mean but introduces variance. To control the variance, we have to use a decreasing learning rate (e.g., $\eta = O(1/t)$) and get a sublinear convergence rate of $O(1/T)$ for strongly convex functions (i.e., needs $O(1/\epsilon)$ iterations to get to $\epsilon$ error rate) and $O(1/\sqrt{T})$ for general smooth functions.</p>
+<h1 id="stochastic-variance-reduced-gradient">Stochastic Variance Reduced Gradient</h1>
+<p>In SVRG, we maintain an estimate $\tilde w$ that is close to the optimal $w$ (e.g., let $\tilde w$ be the average of $w$ during the past $m$ iterations). We also compute the gradient at $\tilde w$:
+$$\tilde \mu = \frac{1}{n}\sum_{i=1}^n \nabla \psi_i(\tilde w)$$
+The sum is expensive, but we will do this only occasionally (e.g., choose $m = 2n$ for convex problem and $m = 5n$ in non-convex problems).</p>
+<p>Note that $\ex[i]{\nabla \psi_i (\tilde w) - \tilde \mu} = 0$. We now change the SGD update into
+$$w^{(t)} = w^{(t-1)} - \eta_t\crab{\nabla \psi_{i_t}(w^{(t-1)}) - \nabla \psi_{i_t}(\tilde w) + \tilde \mu}$$
+The mean of the gradient term is still $\nabla P(w^{(t-1)})$, while the variance reduces:
+$$\nabla \psi_{i_t}(w^{(t-1)}) - \nabla \psi_{i_t}(\tilde w) + \tilde \mu \to \nabla \psi_{i_t}(w^{(t-1)}) - \nabla \psi_{i_t}(w^*) + 0 \to 0$$</p>
+<p><strong><em>Note</em></strong> Equivalently, we can write
+$$\tilde \psi_i(w) = \psi_i(w) - (\nabla \psi_i(\tilde w) - \tilde \mu)\trps w$$
+and performs SGD on $\tilde \psi$.</p>
+<p>With constant $\eta$, SVRG achieves a convergence rate of $O(c^T)$ (w.r.t. the number of gradient computations $T$) for strongly convex functions and $O(1/T)$ for general smooth functions. Even with non-convex functions (e.g., neural networks), SVRG can still get a good convergence rate if the initial value is not far off.</p>
+<h1 id="comparison-to-other-methods">Comparison to Other Methods</h1>
+<p>There are several other methods for reducing the variance:</p>
+<ul>
+<li><a target="_blank" href="http://arxiv.org/abs/1202.6258">Stochastic Average Gradient (SAG)</a></li>
+<li><a target="_blank" href="http://arxiv.org/abs/1209.1873">Stochastic Dual Coordinate Ascent (SDCA)</a></li>
+</ul>
+<h1 id="references">References</h1>
+<ul>
+<li><a target="_blank" href="http://papers.nips.cc/paper/4937-accelerating">http://papers.nips.cc/paper/4937-accelerating</a></li>
+</ul>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:49:30.248180</div>
+    </div>
+  </div>
+</body>
+
+</html>

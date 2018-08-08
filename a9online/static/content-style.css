@@ -1,0 +1,246 @@
+#content-frame {
+  background-color: #FAFAFA;
+}
+
+#content {
+  font-size: 14px;
+  font-family: "Liberation Sans", Arial, sans-serif;
+  /* These will make the scrolling correct */
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  color: #404040;
+}
+
+#content-frame.editor-preview {
+  background-color: transparent;
+}
+#content-frame.editor-preview #content {
+  background-color: #FCFEFF;
+  margin-bottom: 50%;
+}
+
+/*================================================================
+  Blocks */
+
+#content h1, #content h2, #content h3, #content h4,
+#content p, #content pre, #content .table-wrapper,
+#content ul, #content ol, #content dl {
+  margin: 1em 15px;
+  line-height: 1.6;
+}
+
+#content img {
+  display: block;
+  margin: 1em auto;
+  color: red;
+  max-width: 100%;
+}
+
+#content h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: #DEE;
+  text-align: center;
+  padding: 5px;
+  margin: 0.8em 15px;
+  border-radius: 3px;
+  line-height: 1.2;
+}
+
+#content h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#content h3 {
+  font-size: 1.0em;
+  font-weight: bold;
+  font-style: italic;
+}
+
+#content pre {
+  padding: 10px 15px;
+}
+
+#content blockquote {
+  margin: 0 15px;
+  padding-left: 10px;
+  border-left: 2px solid #AAA;
+  background-color: rgba(210, 240, 240, 0.25);
+}
+
+#content blockquote p {
+  margin: 0.5em 15px;
+}
+
+#content blockquote blockquote {
+  margin-right: 0;
+}
+
+#content blockquote li blockquote {
+  margin-left: 0;
+}
+
+#content hr {
+  margin: 1em 30px;
+  border: 0;
+  background-color: #CCCCCF;
+  height: 1px;
+}
+
+#content div.spoiler {
+  display: none;
+  border: 1px dashed #AAB;
+}
+#content-frame.editor-preview #content div.spoiler {
+  display: block;
+}
+#content div.spoiler-button-wrapper {
+  text-align: center;
+  margin: 1em;
+}
+
+/*================================================================
+  Texts */
+
+#content em {
+  font-style: italic;
+}
+
+#content strong {
+  font-weight: bold;
+}
+
+#content strong em {
+  background-color: #DEE;
+  font-style: normal;
+  padding: 1px 3px;
+  border-radius: 2px;
+  margin: 1px 2px;
+}
+
+#content a {
+  color: #22C;
+  text-decoration: none;
+}
+#content a:hover {
+  text-decoration: underline;
+}
+
+#content code, #content tt, #content pre {
+  background-color: #EEE;
+  color: #555;
+  font-size: 100%;
+  font-family: Liberation Mono, Consolas, Menlo, Monaco, Lucida Console, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+}
+
+#content sub, #content sup {
+  font-size: smaller;
+  line-height: 0;
+}
+
+#content sub {vertical-align: sub;}
+#content sup {vertical-align: super;}
+
+#content cite {
+  font-weight: bold;
+  font-style: italic;
+  color: #537;
+}
+
+#content cite a {
+  font-style: normal;
+  color: #96C;
+}
+
+/*================================================================
+  Lists */
+
+#content ul, #content ol {
+  margin-left: 40px;
+}
+
+#content ul ul, #content ul ol, #content ol ul, #content ol ol {
+  margin: 0 0 0 20px;
+}
+
+#content blockquote ul, #content blockquote ol {
+  margin: 0 0 0 20px;
+}
+
+#content ul {list-style-type: disc;}
+#content ul ul {list-style-type: circle;}
+#content ul ul ul {list-style-type: square;}
+
+#content ol {list-style-type: decimal;}
+#content ol ol {list-style-type: lower-latin;}
+#content ol ol ol {list-style-type: lower-roman;}
+
+#content li {
+  display: list-item;
+  margin: 0.5em 0;
+}
+
+#content li p, #content dd p {
+  margin: 0.5em 0;
+}
+
+#content dt {
+  font-weight: bold;
+  margin: 0.67em 0 0 0;
+}
+
+#content dd {
+  margin: 0.67em 0 0 30px;
+}
+
+/*================================================================
+  Tables */
+
+#content table {
+  display: table;
+  border-collapse: collapse;
+  margin: 1em auto;
+}
+
+#content tr {
+  display: table-row;
+}
+
+#content td, #content th { 
+  display: table-cell;
+  padding: 3px 8px;
+  border: 1px solid #BBA;
+}
+
+#content th {
+  font-weight: bold;
+  background-color: #79B;
+  color: white;
+}
+
+#content tr {
+  background-color: #FFF;
+}
+#content tr:nth-child(odd) {
+  background-color: #EFF;
+}
+
+/*================================================================
+  SVG */
+
+svg {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid transparent;
+}
+
+svg:hover {
+  border: 1px solid #DDD;
+}
+
+.svg-error {
+  background-color: #FEE;
+  padding: 1em;
+  font-weight: bold;
+}

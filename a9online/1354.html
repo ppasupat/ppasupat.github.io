@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <script type="text/javascript" src="static/spoiler.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
+  <script type="text/javascript" src="uploads/fibonacci-wave.js"></script>
+  <title>Lunatic Wave &quot;Complex Number Hypnosis (Fibonacci Rabbit)&quot;</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="Lunatic Wave &quot;Complex Number Hypnosis (Fibonacci Rabbit)&quot;">Lunatic Wave &quot;Complex Number Hypnosis (Fibonacci Rabbit)&quot;</div>
+      <div id="content">
+<h1 id="problem-statement">Problem Statement</h1>
+<p><strong><em>Origin</em></strong> <em>Tokyo University entrance exam, science branch, 2001 first semester, <a href="http://server-test.net/math/php.php?name=tokyo&amp;v1=1&amp;v2=2001&amp;v3=1&amp;v4=4&amp;y=2001&amp;n=4" target="_blank">Problem 4</a> (show derivations). I got this problem from a <a href="https://www.facebook.com/roadtotodai/" target="_blank">Facebook page</a> on Todai math entrance exams. Note that this is a loose translation.</em></p>
+<p>Consider points $a_1,a_2,\dots$ in the complex plane defined by $a_1 = 1$, $a_2 = i$, and $a_{n+2} = a_{n+1} + a_n$ for $n \geq 1$. Also define $b_n = a_{n+1}/a_n$.</p>
+<p><strong>(1)</strong> Find the radius of the circle $C$ that passes through points $b_1$, $b_2$, and $b_3$.</p>
+<p><strong>(2)</strong> Prove that all points $b_n$ ($n = 1,2,\dots$) lie on $C$.</p>
+<div class="spoiler" markdown="1"><h1 id="solution">Solution</h1>
+<p>Let's plot the first few values of $b_n$:</p>
+<svg width="320" height="160" stroke="black" fill="white">
+<g transform="translate(160,80)">
+<line x1="-160" x2="160" y1="0" y2="0"></line>
+<line x1="-0" x2="0" y1="-80" y2="80"></line>
+<circle cx="25" cy="0" r="55.9" fill="none"></circle>
+<g transform="translate(0,-50)"><circle r="3" fill="white"></circle></g><g transform="translate(-7,-57)"><foreignObject x="-60" y="-15" width="60" height="30"><div style="line-height: 30px; text-align: right;">$b_1 = i$</div></foreignObject></g>
+<g transform="translate(50,50)"><circle r="3" fill="white"></circle></g><g transform="translate(57,57)"><foreignObject x="0" y="-15" width="100" height="30"><div style="line-height: 30px; text-align: left;">$b_2 = 1-i$</div></foreignObject></g>
+<g transform="translate(75,-25)"><circle r="3" fill="white"></circle></g><g transform="translate(82,-25)"><foreignObject x="0" y="-15" width="100" height="30"><div style="line-height: 30px; text-align: left;">$b_3 = \frac{3+i}{2}$</div></foreignObject></g>
+<g transform="translate(80,10)"><circle r="3" fill="white"></circle></g><g transform="translate(87,17)"><foreignObject x="0" y="-15" width="100" height="30"><div style="line-height: 30px; text-align: left;">$b_4 = \frac{8-i}{5}$</div></foreignObject></g>
+</g>
+</svg>
+
+<p>By extreme eyeballing, $\triangle b_1b_2b_3$ looks like a 45-45-90 triangle, which would make $\frac{1}{2}$ the center of $C$. This is not hard to check:</p>
+<p>$$b_3 - \frac{1}{2} = 1 + \frac{i}{2} = i\nail{\frac{1}{2} - i} = i\nail{b_2 - \frac{1}{2}}$$
+$$b_1 - \frac{1}{2} = i - \frac{1}{2} = i\nail{1 + \frac{i}{2}} = i\nail{b_3 - \frac{1}{2}}$$</p>
+<p><strong>(1)</strong> The radius of $C$ is $\norm{b_1 - \frac{1}{2}} = \frac{\sqrt{5}}{2}$.</p>
+<p><strong>(2)</strong> Let's write the recurrence relation for $b_n$:</p>
+<p>$$\begin{align*}
+a_{n+2} &amp;= a_{n+1} + a_n \\
+\frac{a_{n+2}}{a_{n+1}} &amp;= 1 + \frac{a_n}{a_{n+1}} \\
+b_{n+1} &amp;= 1 + \frac{1}{b_n}
+\end{align*}$$</p>
+<p>We now prove by induction. Suppose $b_n$ is on $C$; i.e., $\norm{b_n - \frac{1}{2}} = \frac{\sqrt{5}}{2}$. Then</p>
+<p>$$\begin{align*}
+\nail{b_n - \frac{1}{2}}\nail{\bar b_n - \frac{1}{2}} &amp;= \frac{5}{4} \\
+b_n\bar b_n - \frac{1}{2}b_n - \frac{1}{2}\bar b_n - 1 &amp;= 0 \\
+-1 + \frac{1}{2\bar b_n} + \frac{1}{2b_n} + \frac{1}{b_n\bar b_n} &amp;= 0 \\
+\nail{\frac{1}{b_n} + \frac{1}{2}}\nail{\frac{1}{\bar b_n} + \frac{1}{2}} &amp;= \frac{5}{4}
+\end{align*}$$</p>
+<p>So $\norm{\frac{1}{b_n} + \frac{1}{2}} = \frac{\sqrt{5}}{2}$, which means $\frac{1}{b_n}$ transforms $b_n$ to a point on another circle $C'$ centered at $-\frac{1}{2}$ with radius $\frac{\sqrt{5}}{2}$. Adding $1$ transforms the point back to $C$, so $b_{n+1} = 1 + \frac{1}{b_n}$ lies on $C$, and we are done.</p>
+<svg width="320" height="160" stroke="black" fill="white">
+<g transform="translate(160,80)">
+<line x1="-160" x2="160" y1="0" y2="0"></line>
+<line x1="-0" x2="0" y1="-80" y2="80"></line>
+<circle cx="25" cy="0" r="55.9" fill="none"></circle>
+<circle cx="-25" cy="0" r="55.9" fill="none" stroke="red"></circle>
+<g transform="translate(50,50)"><circle r="3" fill="white"></circle></g><g transform="translate(57,57)"><foreignObject x="0" y="-15" width="100" height="30"><div style="line-height: 30px; text-align: left;">$b_2 = 1-i$</div></foreignObject></g>
+<g transform="translate(25,-25)"><circle r="3" fill="white"></circle></g><g transform="translate(20,-20)"><foreignObject x="-60" y="-15" width="60" height="30"><div style="line-height: 30px; text-align: right;">$b_2'$</div></foreignObject></g>
+<g transform="translate(75,-25)"><circle r="3" fill="white"></circle></g><g transform="translate(82,-25)"><foreignObject x="0" y="-15" width="100" height="30"><div style="line-height: 30px; text-align: left;">$b_3 = \frac{3+i}{2}$</div></foreignObject></g>
+<g><line x1="49.05131670194949" y1="47.15395010584846" x2="25.94868329805051" y2="-22.15395010584846" stroke="black"></line><polygon points="0,0 -6,3 -6,-3" stroke="none" fill="black" transform="translate(25.94868329805051,-22.15395010584846) rotate(-108.43494882292202)"></polygon></g><g><line x1="28" y1="-25" x2="72" y2="-25" stroke="black"></line><polygon points="0,0 -6,3 -6,-3" stroke="none" fill="black" transform="translate(72,-25) rotate(0)"></polygon></g>
+</g>
+</svg>
+
+<div id="animation-holder"></div><h1 id="epilogue">Epilogue</h1>
+<p>The two circles and the phasing of points initially reminded me of a certain Touhou <a href="https://en.touhouwiki.net/wiki/Imperishable_Night/Spell_Cards/Stage_5#Spell_Card_102" target="_blank">spellcard</a>.</p>
+<p></p></div><p></p>
+
+      </div>
+      <div id="content-time">Exported: 2017-06-15T00:21:20.855344</div>
+    </div>
+  </div>
+</body>
+
+</html>

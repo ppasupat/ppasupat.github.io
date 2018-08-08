@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>Fisher Information</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="Fisher Information">Fisher Information</div>
+      <div id="content">
+<h1 id="fisher-information">Fisher Information</h1>
+<p><strong>Fisher information</strong> (named after <a target="_blank" href="http://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a>, who camed up with ANOVA and MLE) measures the amount of information that an observed variable $X$ has about a hidden variable $\theta$. It is used in the asymptotic theory of MLE, Jeffreys prior, and Wald test.</p>
+<p>Let $p(X|\theta)$ be the likelihood distribution. Then the log-likelihood is
+$$\Mr{LL}(\theta) = \log p(X|\theta)$$
+We define the <strong>score</strong> as
+$$\Mr{score}(\theta) = \fracp{}{\theta} \log p(X|\theta)$$
+Under regular conditions, the <em>first</em> moment of the score is 0:
+$$\begin{align*}
+\ex[X]{\Mr{score}(\theta)|\theta}
+&amp;= \int \nail{\fracp{}{\theta} \log p(X|\theta)} p(x|\theta)\,dx \\
+&amp;= \int \nail{\frac{1}{p(x|\theta)}\fracp{p(x|\theta)}{\theta}} p(x|\theta)\,dx \\
+&amp;= \fracp{}{\theta} \int p(x|\theta)\, dx = \fracp{}{\theta} 1 = 0
+\end{align*}$$</p>
+<p>The <strong>Fisher information</strong> is the <em>second</em> moment:
+$$I(\theta) = \ex[X]{\nail{\fracp{}{\theta}\log p(X|\theta)}^2\midd\theta}$$
+Under regular conditions ($p(X|\theta)$ is twice differentiable), chain rule will imply 
+$$I(\theta) = -\ex[X]{\fracp{^2}{\theta^2}\log p(X|\theta)\midd \theta}$$
+Note that Fisher information does not depend on a particular $X=x$ since it is integrated out.</p>
+<h2 id="intuition">Intuition</h2>
+<p>Fisher information measures the <strong>curvature</strong> of the log-likelihood. If we plot the log-likelihood, high curvature = deep valley = easy to get optimal $\theta$ = we got a lot of information about $\theta$ from $X$ = high Fisher information.</p>
+<h2 id="properties">Properties</h2>
+<ul>
+<li>$I_{X,Y}(\theta) = I_X(\theta) + I_Y(\theta)$</li>
+<li>If $T(X)$ is a sufficient statistics for $\theta$ (i.e., $$p(X=x|T(X)=t,\theta) = p(X=x|T(X)=t)$$ independent of $\theta$), then $I_T(\theta) = I_X(\theta)$</li>
+<li>For other statistics $T(X)$, we get $I_T(\theta) \leq I_X(\theta)$</li>
+<li><strong><em>Theorem</em></strong> (<strong>Cramér-Rao Bound</strong>) For any <em>unbiased</em> estimator $\hat\theta$,
+  $$\varr{\hat\theta} \geq \frac{1}{I(\theta)}$$
+  This makes sense: less information means that it is more difficult to pinpoint the estimator, and thus the variance increases.</li>
+<li><strong><em>Definition</em></strong> (<strong>Jeffreys Prior</strong>) The Jeffreys prior is defined as
+  $$p_\theta(\theta) \propto \sqrt{I(\theta)}$$
+  Jeffreys prior is an uninformative prior that is not sensitive to parameterization; i.e., both the original $p_\theta(\theta)$ and
+  $$p_\phi(\phi) = p_\theta(\theta)\abs{\fracd{\theta}{\phi}}$$
+  for any reparameterization $\phi = h(\theta)$ will be uninformative.</li>
+</ul>
+<h1 id="fisher-information-matrix">Fisher Information Matrix</h1>
+<p>Suppose we have $N$ parameters $\theta = (\theta_1, \dots, \theta_N)$. Fisher information becomes an $N\times N$ matrix $I(\theta)$ with entries
+$$I(\theta)_{ij} = \ex[X]{\nail{\fracp{}{\theta_i} \log p(X|\theta)}\nail{\fracp{}{\theta_j} \log p(X|\theta)}\midd \theta}$$
+Note that $I(\theta) \succeq 0$.</p>
+<p>Again, under regular conditions, we also get
+$$I(\theta)_{ij} = -\ex[X]{\frac{\partial^2}{\partial \theta_i \partial \theta_j} \log p(X|\theta)\midd \theta}$$</p>
+<p>If $I(\theta)_{ij} = 0$, we say that $\theta_i$ and $\theta_j$ are <strong>orthogonal parameters</strong>, and their MLE will be independent.</p>
+<h1 id="references">References</h1>
+<ul>
+<li><a target="_blank" href="http://en.wikipedia.org/wiki/Ronald_Fisher#See_also">http://en.wikipedia.org/wiki/Ronald_Fisher#See_also</a></li>
+<li><a target="_blank" href="http://en.wikipedia.org/wiki/Fisher_information">http://en.wikipedia.org/wiki/Fisher_information</a></li>
+<li><a target="_blank" href="http://mark.reid.name/blog/fisher-information-and-log-likelihood.html">http://mark.reid.name/blog/fisher-information-and-log-likelihood.html</a></li>
+<li><a target="_blank" href="http://en.wikipedia.org/wiki/Cramér–Rao_bound">http://en.wikipedia.org/wiki/Cramér–Rao_bound</a></li>
+</ul>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:47:40.711777</div>
+    </div>
+  </div>
+</body>
+
+</html>

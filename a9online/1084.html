@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <title>[024] DP: Collapsed Gibbs Sampling</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="[024] DP: Collapsed Gibbs Sampling">[024] DP: Collapsed Gibbs Sampling</div>
+      <div id="content">
+<h1 id="inference">Inference</h1>
+<p>Given $x_1, \dots, x_N$, we would like to infer $z_1, \dots, z_N$. We can try</p>
+<p>$$\prob{\Mb{z}\mid\Mb{x}} = \frac{\prob{\Mb{x}\mid\Mb{z}}\prob{\Mb{z}}}{\prob{\Mb{x}}}$$</p>
+<p>However, enumerate all possible cluster configurations is intractable. So we need to approximate, and one way is to use MCMC.</p>
+<p>In particular, we will use Gibbs sampling. The idea is to resample one $z_i$ at a time. To sample $z_i$ in the Chinese restaurant process viewpoint, move customer #$i$ to be the last customer (can do so because of exchangeability), and let the customer choose a table.</p>
+<h1 id="collapsed-gibbs-sampling">Collapsed Gibbs Sampling</h1>
+<svg fill="white" stroke="black" width="220" height="175">
+<g transform="translate(100,20)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\pi$</div></foreignObject></g>
+<g transform="translate(65,50)"><rect fill="white" height="120" width="70" y="0" x="0"></rect><foreignObject height="120" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 114px; text-align: right; vertical-align: bottom; padding: 3px;">$N$</div></foreignObject></g>
+<g transform="translate(145,50)"><rect fill="white" height="60" width="70" y="0" x="0"></rect><foreignObject height="60" width="70" y="0" x="0"><div style="display: table-cell; width: 70px; height: 54px; text-align: right; vertical-align: bottom; padding: 3px;">$\infty$</div></foreignObject></g>
+<g transform="translate(40,20)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\alpha$</div></foreignObject></g>
+<g transform="translate(100,80)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$z_i$</div></foreignObject></g>
+<g transform="translate(100,140)"><circle fill="lightgray" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$x_i$</div></foreignObject></g>
+<g transform="translate(180,80)"><circle fill="white" r="16"></circle><foreignObject height="32" width="32" y="-16" x="-16"><div style="line-height: 32px; text-align: center;">$\theta_j$</div></foreignObject></g>
+<g transform="translate(180,20)"><rect fill="lightgray" height="28" width="28" y="-14" x="-14"></rect><foreignObject height="28" width="28" y="-14" x="-14"><div style="line-height: 28px; text-align: center;">$\lambda$</div></foreignObject></g>
+<g><line stroke="black" y2="19.999999999999996" x2="84" y1="20" x1="54"></line><polygon transform="translate(84,19.999999999999996) rotate(0)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="64" x2="100" y1="36" x1="100"></line><polygon transform="translate(100,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="124" x2="100" y1="96" x1="100"></line><polygon transform="translate(100,124) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="64" x2="180" y1="34" x1="180"></line><polygon transform="translate(180,64) rotate(90)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+<g><line stroke="black" y2="130.4" x2="112.8" y1="89.6" x1="167.2"></line><polygon transform="translate(112.8,130.4) rotate(143.13010235415598)" fill="black" stroke="none" points="0,0 -6,3 -6,-3"></polygon></g>
+</svg>
+
+<p><strong><em>Input</em></strong> Current $\Mb{z}^{(t-1)}$ in Markov chain</p>
+<p><strong><em>Output</em></strong> $\Mb{z}^{(t)}$</p>
+<blockquote>
+<ol>
+<li>Pick a random permutation $\tau$ of $\set{1,\dots,N}$</li>
+<li>For each $i\in\set{\tau(1),\dots,\tau(N)}$, resample $z_i$ as follows.<blockquote>
+<p>a. Find the likelihoods:
+$$\begin{align*}
+f_j(x_i) &amp;= \prob{x_i\mid z_i = j, \text{other }x, \text{other }z,\lambda} \\
+&amp;= \prob{x_i\mid \text{other }x\text{ in table }j, \lambda} \\
+&amp;= \prob{x_i\mid \lambda^*} \\
+f_\text{new}(x_i) &amp;= \prob{x_i\mid z_i = \text{new cluster},\text{other }x, \text{other }z,\lambda} \\
+&amp;= \prob{x_i\mid \lambda}\end{align*}$$
+b. Sample new $z_i$ from the multinomial distribution:
+$$\begin{align*}
+\prob{z_i = j} &amp;\propto \crab{N_j\text{ not counting }z_i} f_j(x_i) \\
+\prob{z_i = \text{new cluster}} &amp;\propto \alpha f_\text{new}(x_i)
+\end{align*}$$
+c. Clean up empty clusters and establish new clusters (by sampling new $\theta_j$)</p>
+</blockquote>
+</li>
+<li>Return the new $\Mb{z}$</li>
+</ol>
+</blockquote>
+<p><strong><em>Notes</em></strong></p>
+<ul>
+<li>To calculate $\prob{x_i \mid \lambda}$, use
+  $$\int_\Theta \prob{x_i\mid\theta}\prob{\theta\mid\lambda}\,d\theta$$
+  Since we have <strong>collapsed</strong> $\theta$ out, the algorithm is called <strong>collapsed Gibbs sampling</strong>.</li>
+<li>We can convert $\prob{x_i\mid \text{other }x\text{ in table }j, \lambda}$ to $\prob{x_i\mid \lambda^*}$ for some $\lambda^*$ if $H$ is a conjugate prior of $F$.</li>
+<li>We may also want to resample $\alpha$. For example, we can use the prior $\alpha \sim \Mr{Gamma}(a,b)$ and resample $\alpha^{(t)}$ independent from $\alpha^{(t-1)}$.</li>
+</ul>
+
+      </div>
+      <div id="content-time">Exported: 2016-07-13T01:47:06.083426</div>
+    </div>
+  </div>
+</body>
+
+</html>

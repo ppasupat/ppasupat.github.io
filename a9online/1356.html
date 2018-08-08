@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/reset.css" />
+  <link rel="stylesheet" type="text/css" href="static/viewer-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/content-style.css" />
+  <link rel="stylesheet" type="text/css" href="static/print-style.css" media="print" />
+  <script type="text/javascript" src="static/mathjax/MathJax.js?config=local"></script>
+  <script type="text/javascript" src="static/spoiler.js"></script>
+  <title>The Legendary Todai Entrance Exam Problem</title>
+  <link type="image/x-icon" rel="shortcut icon" href="static/icons/favicon-pad.png">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content-frame">
+      <div id="content-name" title="The Legendary Todai Entrance Exam Problem">The Legendary Todai Entrance Exam Problem</div>
+      <div id="content">
+<h1 id="problem-statement">Problem Statement</h1>
+<p><strong><em>Origin</em></strong> <em>Tokyo University entrance exam, science branch, 1998 second semester, <a href="http://server-test.net/math/php.php?name=tokyo&amp;v1=1&amp;v2=1998&amp;v3=2&amp;v4=3&amp;y=1998&amp;n=9" target="_blank">Problem 3</a> (show derivations). The book <a href="https://www.amazon.co.jp/dp/4062574071/" target="_blank">入試数学伝説の良問100</a> describes this problem as the most difficult entrance exam problem in the history. <a href="http://examist.jp/legendexam/1998-tokyo/" target="_blank">Online sources</a> seem to agree. Note that this is a loose translation.</em></p>
+<p>A <a href="https://en.wikipedia.org/wiki/Graph_%28discrete_mathematics%29" target="_blank">graph</a> $G = (V, W)$ is a tuple of a node set $V = \{P_1,\dots,P_n\}$ and an edge set $E = \{E_1,\dots,E_m\}$. Each node is colored either white or black.</p>
+<p>From any graph $G=(V,W)$, define two operations for creating a new graph $G'=(V',W')$ with one additional node $P'$:</p>
+<p><strong>Operation 1</strong> picks a node $P \in V$ and then adds an edge $(P, P')$. The color of $P$ is flipped, while $P'$ is painted white.</p>
+<p><strong>Operation 2</strong> picks an edge $E = (P, \tilde P) \in W$, removes the edge, and then adds two new edges $(P,P')$ and $(\tilde P,P')$. The color of $P$ is flipped, the color of $\tilde P$ is also flipped, and $P'$ is painted white.</p>
+<p>Let the starting graph contain a single white node:</p>
+<svg width="40" height="40" stroke="black" fill="white">
+<g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+</g>
+</svg>
+
+<p><strong>(1)</strong> Prove that each of the graphs below can be obtained via the two operations above. (All nodes are white.)</p>
+<svg width="320" height="120" stroke="black" fill="white">
+<g>
+<g transform="translate(20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,100)"><circle r="10" fill="white"></circle></g>
+<g><line x1="20" y1="50" x2="19.999999999999996" y2="30" stroke="black"></line></g><g><line x1="20" y1="70" x2="20" y2="90" stroke="black"></line></g>
+</g>
+<g transform="translate(80,0)">
+<g transform="translate(20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,100)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(-20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="white"></circle></g>
+<g><line x1="20" y1="50" x2="19.999999999999996" y2="30" stroke="black"></line></g><g><line x1="20" y1="70" x2="20" y2="90" stroke="black"></line></g>
+<g><line x1="10" y1="60" x2="-10" y2="60" stroke="black"></line></g><g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g>
+</g>
+<g transform="translate(200,0)">
+<g transform="translate(20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,100)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(-20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,100)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(100,60)"><circle r="10" fill="white"></circle></g>
+<g><line x1="20" y1="50" x2="19.999999999999996" y2="30" stroke="black"></line></g><g><line x1="20" y1="70" x2="20" y2="90" stroke="black"></line></g>
+<g><line x1="10" y1="60" x2="-10" y2="60" stroke="black"></line></g><g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g>
+<g><line x1="60" y1="50" x2="60" y2="30" stroke="black"></line></g><g><line x1="60" y1="70" x2="60" y2="90" stroke="black"></line></g><g><line x1="70" y1="60" x2="90" y2="60" stroke="black"></line></g>
+</g>
+</svg>
+
+<p><strong>(2)</strong> Find the necessary and sufficient condition for $n \in \NN$ such that the graph below with $n$ nodes can be obtained via the two operations. (All nodes are white.)</p>
+<svg width="200" height="65" stroke="black" fill="white">
+<g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(100,20)"><foreignObject x="-15" y="-15" width="30" height="30"><div style="line-height: 30px; text-align: center;">...</div></foreignObject></g>
+<g transform="translate(100,50)"><foreignObject x="-50" y="-15" width="100" height="30"><div style="line-height: 30px; text-align: center;">(n nodes)</div></foreignObject></g>
+<g transform="translate(140,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(180,20)"><circle r="10" fill="white"></circle></g>
+<g><line x1="30" y1="20" x2="50" y2="20" stroke="black"></line></g>
+<g><line x1="70" y1="20" x2="85" y2="19.999999999999996" stroke="black"></line></g>
+<g><line x1="115" y1="20" x2="130" y2="20" stroke="black"></line></g>
+<g><line x1="150" y1="20" x2="170" y2="20" stroke="black"></line></g>
+</g>
+</svg>
+
+<div class="spoiler" markdown="1"><h1 id="solution">Solution</h1>
+<p><strong>(1)</strong> All steps are Operation 1 unless indicated.</p>
+<svg width="320" height="120" stroke="black" fill="white">
+<g>
+<g transform="translate(20,60)"><circle r="10" fill="white"></circle></g>
+</g>
+<g transform="translate(40,0)">
+<g transform="translate(20,60)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g><line x1="20" y1="50" x2="19.999999999999996" y2="30" stroke="black"></line></g>
+</g>
+<g transform="translate(80,0)">
+<rect x="5" y="5" width="30" height="110" fill="#ff8" stroke="none"></rect>
+<g transform="translate(20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,100)"><circle r="10" fill="white"></circle></g>
+<g><line x1="20" y1="50" x2="19.999999999999996" y2="30" stroke="black"></line></g><g><line x1="20" y1="70" x2="20" y2="90" stroke="black"></line></g>
+</g>
+<g transform="translate(160,0)">
+<g transform="translate(20,60)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,100)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(-20,60)"><circle r="10" fill="white"></circle></g>
+<g><line x1="20" y1="50" x2="19.999999999999996" y2="30" stroke="black"></line></g><g><line x1="20" y1="70" x2="20" y2="90" stroke="black"></line></g>
+<g><line x1="10" y1="60" x2="-10" y2="60" stroke="black"></line></g>
+</g>
+<g transform="translate(240,0)">
+<rect x="-35" y="5" width="110" height="110" fill="#ff8" stroke="none"></rect>
+<g transform="translate(20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,100)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(-20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="white"></circle></g>
+<g><line x1="20" y1="50" x2="19.999999999999996" y2="30" stroke="black"></line></g><g><line x1="20" y1="70" x2="20" y2="90" stroke="black"></line></g>
+<g><line x1="10" y1="60" x2="-10" y2="60" stroke="black"></line></g><g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g>
+</g>
+</svg>
+
+<svg width="360" height="320" stroke="black" fill="white">
+<g>
+<g transform="translate(20,60)"><circle r="10" fill="white"></circle></g>
+</g>
+<g transform="translate(40,0)">
+<g transform="translate(20,60)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="white"></circle></g>
+<g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g>
+</g>
+<g transform="translate(120,0)">
+<g transform="translate(20,60)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(100,60)"><circle r="10" fill="white"></circle></g>
+<g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g><g><line x1="70" y1="60" x2="90" y2="60" stroke="black"></line></g>
+</g>
+<g transform="translate(240,0)">
+<g transform="translate(20,60)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(100,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g><g><line x1="70" y1="60" x2="90" y2="60" stroke="black"></line></g><g><line x1="60" y1="50" x2="60" y2="30" stroke="black"></line></g>
+</g>
+<g transform="translate(0,80)">
+<g transform="translate(20,60)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(100,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,100)"><circle r="10" fill="white"></circle></g>
+<g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g><g><line x1="70" y1="60" x2="90" y2="60" stroke="black"></line></g><g><line x1="60" y1="50" x2="60" y2="30" stroke="black"></line></g><g><line x1="60" y1="70" x2="60" y2="90" stroke="black"></line></g>
+</g>
+<g><line x1="130" y1="140" x2="190" y2="140" stroke="black"></line><polygon points="0,0 -6,3 -6,-3" stroke="none" fill="black" transform="translate(190,140) rotate(0)"></polygon></g>
+<g transform="translate(160,130)"><foreignObject x="-30" y="-15" width="60" height="30"><div style="line-height: 30px; text-align: center;">Op. 2</div></foreignObject></g>
+<g transform="translate(240,80)">
+<g transform="translate(20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(-20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(100,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,100)"><circle r="10" fill="white"></circle></g>
+<g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g><g><line x1="70" y1="60" x2="90" y2="60" stroke="black"></line></g><g><line x1="60" y1="50" x2="60" y2="30" stroke="black"></line></g>
+<g><line x1="60" y1="70" x2="60" y2="90" stroke="black"></line></g><g><line x1="10" y1="60" x2="-10" y2="60" stroke="black"></line></g>
+</g>
+<g transform="translate(40,200)">
+<g transform="translate(20,60)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(-20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(100,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,100)"><circle r="10" fill="white"></circle></g>
+<g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g><g><line x1="70" y1="60" x2="90" y2="60" stroke="black"></line></g><g><line x1="60" y1="50" x2="60" y2="30" stroke="black"></line></g>
+<g><line x1="60" y1="70" x2="60" y2="90" stroke="black"></line></g><g><line x1="10" y1="60" x2="-10" y2="60" stroke="black"></line></g><g><line x1="20" y1="30" x2="20" y2="50" stroke="black"></line></g>
+</g>
+<g transform="translate(240,200)">
+<rect x="-35" y="5" width="150" height="110" fill="#ff8" stroke="none"></rect>
+<g transform="translate(20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(-20,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(20,100)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(100,60)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(60,100)"><circle r="10" fill="white"></circle></g>
+<g><line x1="30" y1="60" x2="50" y2="60" stroke="black"></line></g><g><line x1="70" y1="60" x2="90" y2="60" stroke="black"></line></g><g><line x1="60" y1="50" x2="60" y2="30" stroke="black"></line></g>
+<g><line x1="60" y1="70" x2="60" y2="90" stroke="black"></line></g><g><line x1="10" y1="60" x2="-10" y2="60" stroke="black"></line></g><g><line x1="20" y1="30" x2="20" y2="50" stroke="black"></line></g><g><line x1="20" y1="90" x2="19.999999999999996" y2="70" stroke="black"></line></g>
+</g>
+</svg>
+
+<p><strong>(2)</strong> We will aim for induction.</p>
+<p>It's easier to think in reverse. Starting from the target graph with $n$ nodes lying on a single line:</p>
+<p><strong>Reverse of Operation 1:</strong> Pick a white end node $P$, flip the color of the adjacent node, and then remove $P$.</p>
+<p><strong>Reverse of Operation 2:</strong> Pick a white intermediate node $P$, flip the colors of the adjacent nodes, and then remove $P$.</p>
+<p>In addition, with all nodes in the same line, we can merge the two operations  by adding <strong>auxiliary nodes</strong> to both ends. These nodes cannot be operated upon, and the goal is to collapse all nodes except these auxiliary nodes (which do not have to end up white).</p>
+<p>When $n = 0$ or $n = 1$ all nodes can be collapsed uniquely.</p>
+<svg width="80" height="40" stroke="black" fill="white">
+<g>
+<line x1="20" y1="20" x2="60" y2="20"></line>
+<g transform="translate(20,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect></g>
+<g transform="translate(60,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect></g>
+</g>
+</svg>
+
+<svg width="120" height="70" stroke="black" fill="white">
+<g>
+<line x1="20" y1="20" x2="100" y2="20"></line>
+<g transform="translate(20,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(100,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect></g>
+</g>
+<g transform="translate(0,30)">
+<line x1="20" y1="20" x2="100" y2="20"></line>
+<g transform="translate(20,20)"><rect x="-10" y="-10" width="20" height="20" fill="black"></rect></g>
+<g transform="translate(100,20)"><rect x="-10" y="-10" width="20" height="20" fill="black"></rect></g>
+</g>
+</svg>
+
+<p>When $n = 2$, the nodes cannot be collapsed completely.</p>
+<svg width="160" height="70" stroke="black" fill="white">
+<g>
+<line x1="20" y1="20" x2="140" y2="20"></line>
+<g transform="translate(20,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(100,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(140,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect></g>
+</g>
+<g transform="translate(0,30)">
+<line x1="20" y1="20" x2="140" y2="20"></line>
+<g transform="translate(20,20)"><rect x="-10" y="-10" width="20" height="20" fill="black"></rect></g>
+<g transform="translate(100,20)"><circle r="10" fill="black"></circle></g>
+<g transform="translate(140,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect></g>
+</g>
+</svg>
+
+<p>Now consider the general case with $n$ nodes. Suppose we succeed, and the last node we remove is $P$, with $l$ nodes on the left and $r = n-l-1$ nodes on the right:</p>
+<svg width="320" height="160" stroke="black" fill="white">
+<g>
+<g transform="translate(45,5)"><rect x="0" y="0" width="110" height="65" fill="#fcc" stroke="none"></rect><foreignObject x="0" y="0" width="110" height="65"><div style="display: table-cell; width: 110px; height: 59px; text-align: center; vertical-align: bottom; padding: 3px;">$l$ nodes</div></foreignObject></g>
+<g transform="translate(205,5)"><rect x="0" y="0" width="70" height="65" fill="#ccf" stroke="none"></rect><foreignObject x="0" y="0" width="70" height="65"><div style="display: table-cell; width: 70px; height: 59px; text-align: center; vertical-align: bottom; padding: 3px;">$r$ nodes</div></foreignObject></g>
+<line x1="20" y1="20" x2="300" y2="20"></line>
+<g transform="translate(20,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect></g>
+<g transform="translate(60,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(100,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(140,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(180,20)"><circle r="10" fill="white"></circle><foreignObject x="-10" y="-10" width="20" height="20"><div style="line-height: 20px; text-align: center;">$P$</div></foreignObject></g>
+<g transform="translate(220,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(260,20)"><circle r="10" fill="white"></circle></g>
+<g transform="translate(300,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect></g>
+</g>
+<g transform="translate(180,80)"><foreignObject x="-30" y="-15" width="60" height="30"><div style="line-height: 30px; text-align: center;">$\vdots$</div></foreignObject></g>
+<g transform="translate(0,90)">
+<line x1="20" y1="20" x2="300" y2="20"></line>
+<g transform="translate(20,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect><foreignObject x="-10" y="-10" width="20" height="20"><div style="line-height: 20px; text-align: center;">?</div></foreignObject></g>
+<g transform="translate(180,20)"><circle r="10" fill="white"></circle><foreignObject x="-10" y="-10" width="20" height="20"><div style="line-height: 20px; text-align: center;">$P$</div></foreignObject></g>
+<g transform="translate(300,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect><foreignObject x="-10" y="-10" width="20" height="20"><div style="line-height: 20px; text-align: center;">?</div></foreignObject></g>
+</g>
+<g transform="translate(0,120)">
+<line x1="20" y1="20" x2="300" y2="20"></line>
+<g transform="translate(20,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect><foreignObject x="-10" y="-10" width="20" height="20"><div style="line-height: 20px; text-align: center;">?</div></foreignObject></g>
+<g transform="translate(300,20)"><rect x="-10" y="-10" width="20" height="20" fill="white"></rect><foreignObject x="-10" y="-10" width="20" height="20"><div style="line-height: 20px; text-align: center;">?</div></foreignObject></g>
+</g>
+</svg>
+
+<p>This breaks the problem into 2 subproblems of sizes $l$ and $r$ ($0 \leq l \leq n-1$). The order in which we remove the nodes from these subproblems does not matter. The only requirement is that after both subproblems are solved, $P$ must be white; i.e., have been flipped an even number of times.</p>
+<p>Based on the small cases, we make a hypothesis:</p>
+<ul>
+<li>If $n = 3u$, then all $n$ nodes can be collapsed, and both auxiliary nodes will always become white (i.e., have been flipped even numbers of times).</li>
+<li>If $n = 3u + 1$, then all $n$ nodes can be collapsed, and both auxiliary nodes will always become black (i.e., have been flipped odd numbers of times).</li>
+<li>If $n = 3u + 2$, then we will fail to collapse all $n$ nodes.</li>
+</ul>
+<p>We will prove by induction. The base cases ($n = 0,1,2$) are already proven. For the inductive step, we consider the 3 cases separately. Due to the inductive hypothesis, a subproblem (red or blue) cannot have size $3v+2$.</p>
+<ul>
+<li>If $n = 3u$, we can only do $l = 3v + 1$ and $r = 3w + 1$. This flips $P$ (odd + odd) = even number of times, and flips both auxiliary nodes (odd + 1) = even number of times.</li>
+<li>If $n = 3u+1$, we can only do $l = 3v$ and $r = 3w$. This flips $P$ (even + even) = even number of times, and flips both auxiliary nodes (even + 1) = odd number of times.</li>
+<li>If $n = 3u+2$, one of $l$ and $r$ must be $3v$ and the other must be $3w+1$. This flips $P$ (even + odd) = odd number of times, and thus we will always fail to collapse all nodes.</li>
+</ul>
+<p>Therefore, all $n$ nodes can be collapsed if and only if $n \not\equiv 2 \pmod 3$.</p>
+<h1 id="epilogue">Epilogue</h1>
+<p>The original problem statement is very verbose, making it look deceptively scary. On top of that, the book uses group theory to prove (2), which makes the problem look even scarier. (Well, the solution above also uses ideas from group theory without referring to group theory.)</p>
+<p>Another thing: here is <a href="https://artofproblemsolving.com/community/c3956_2005_imo_shortlist" target="_blank">International Mathematical Olympiad 2005 Shortlist</a>, Problem C5:</p>
+<p>There are $ n$ markers, each with one side white and the other side black. In the beginning, these $ n$ markers are aligned in a row so that their white sides are all up. In each step, if possible, we choose a marker whose white side is up (but not one of the outermost markers), remove it, and reverse the closest marker to the left of it and also reverse the closest marker to the right of it. Prove that, by a finite sequence of such steps, one can achieve a state with only two markers remaining if and only if $ n - 1$ is not divisible by $3$.</p>
+<p>Err... <strong>it's exactly the same problem!</strong> Somehow it managed to get to the shortlist.</p>
+</div>
+      </div>
+      <div id="content-time">Exported: 2017-06-10T05:02:15.338085</div>
+    </div>
+  </div>
+</body>
+
+</html>
