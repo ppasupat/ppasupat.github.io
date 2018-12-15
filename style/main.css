@@ -35,6 +35,10 @@ ul ul {
   margin-top: .3em;
 }
 
+.blocky {
+  display: block;
+}
+
 /* Layout */
 
 #wrapper {
@@ -121,7 +125,7 @@ ul.publications li {
   
 }
 
-.ps a {
+.ps a, .ps .linklike {
   display: inline-block;
   border: solid 1px #AAA;
   padding: 0.05em 0.4em;
@@ -130,6 +134,7 @@ ul.publications li {
   text-decoration: none;
   background-color: #EEE;
   color: #222;
+  cursor: pointer;
 }
 
 .ps a:hover {
