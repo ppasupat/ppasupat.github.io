@@ -102,6 +102,34 @@ li {
   margin-bottom: .3em;
 }
 
+/* Navbar */
+
+#navbar {
+  border-bottom: 1px solid #eaeaea;
+}
+
+#navbar-inner {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+}
+
+#navbar a {
+  display: inline-block;
+  flex-grow: 1;
+  text-align: center;
+  padding: 0.5em 0;
+  margin: 0.25em 5px 0;
+  color: #888;
+  border-bottom: 4px solid transparent;
+}
+
+#navbar a.active, #navbar a:hover {
+  text-decoration: none;
+  color: #222;
+  border-bottom: 4px solid #ddd;
+}
+
 /* Publications */
 
 ul.publications li {
