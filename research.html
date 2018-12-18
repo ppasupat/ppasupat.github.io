@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" context="Panupong Pasupat's Personal Page">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research | Panupong (Ice) Pasupat</title>
+  <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link href="style/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" integrity="sha384-B41nY7vEWuDrE9Mr+J2nBL0Liu+nl/rBXTdpQal730oTHdlrlXHzYMOhDU60cwde" crossorigin="anonymous">
+</head>
+<body>
+
+<div id="navbar">
+  <div id="navbar-inner">
+    <a href="/">Home</a>
+    <a class="active" href="/research.html">Research</a>
+    <a href="/notes.html">Notes</a>
+    <a href="/fun.html">Fun</a>
+  </div>
+</div>
+
+<div id="wrapper">
+
+  <div class="section" id="resources">
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="https://nlp.stanford.edu/software/sempre/">SEMPRE</a>:
+      Our framework for training semantic parsers from denotations.</li>
+      <li><a href="https://nlp.stanford.edu/software/sempre/wikitable/">WikiTableQuestions Dataset</a>:
+      A dataset of complex question on Wikipedia tables.
+      <ul>
+        <li><a href="https://worksheets.codalab.org/worksheets/0xca1104da2ecb42c2b9c0cde07256e033/">
+        SEMPRE models</a> trained on the dataset.</li>
+        <li><a href="https://nlp.stanford.edu/software/sempre/wikitable/dpd/">DPD Outputs on WikiTableQuestions</a>:
+        Inferred consistent logical forms for the training examples in the WikiTableQuestions dataset.</li>
+      </ul>
+      <li><a href="https://nlp.stanford.edu/projects/scone/">SCONE</a>:
+      Sequential CONtext-dependent Execution dataset.</li>
+      <li><a href="https://github.com/stanfordnlp/miniwob-plusplus">MiniWoB++ Benchmark</a>:
+      A benchmark for learning reinforcement learning agents that interact with websites.
+      An extension of OpenAI MiniWoB benchmark.</li>
+    </ul>
+  </div>
+
+  <hr>
+  
+  <div class="section" id="publication">
+    <h2>Publications</h2>
+    <h3>Web Interaction</h3>
+    <ul class="publications">
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Mapping Natural Language Commands to Web Elements</span><br>
+        <span class="pa me">Panupong Pasupat</span>, <span class="pa">Tian-Shun Jiang</span>, <span class="pa">Evan Liu</span>, <span class="pa">Kelvin Guu</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Empirical Methods on Natural Language Processing (EMNLP)</span>, 2018<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1808.09132">paper</a>
+          <a href="https://github.com/stanfordnlp/phrasenode">dataset + code</a>
+          <a href="https://worksheets.codalab.org/worksheets/0x0097f249cd944284a81af331093c3579/">CodaLab</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Reinforcement Learning on Web Interfaces using Workflow-Guided Exploration</span><br>
+        <span class="pa">Evan Zheran Liu*</span>, <span class="pa">Kelvin Guu*</span>, <span class="pa me">Panupong Pasupat*</span>, <span class="pa">Tianlin Shi</span>, <span class="pa">Percy Liang</span>
+        <span class="sidenote">(*equal contributions)</span><br>
+        <span class="pc">International Conference on Learning Representations (ICLR)</span>, 2018<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1802.08802">paper</a>
+          <a href="https://stanfordnlp.github.io/wge/">code</a>
+          <a href="https://worksheets.codalab.org/worksheets/0x0f25031bd42f4aabbc17625fe1484066/">CodaLab</a>
+          <a href="https://github.com/stanfordnlp/miniwob-plusplus">dataset</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Zero-Shot Entity Extraction from Web Pages</span><br>
+        <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2014<br>
+        <span class="ps">
+          <a href="https://nlp.stanford.edu/pubs/pasupat-liang-acl2014.pdf">paper</a>
+          <a href="http://www-nlp.stanford.edu/software/sempre/web-entity-extractor-ACL2014/">project + dataset</a>
+          <a href="resource/ACL2014-slides.v1.pdf">slides</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+    </ul>
+    <h3>Semantic Parsing</h3>
+    <ul class="publications">
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Macro Grammars and Holistic Triggering for Efficient Semantic Parsing</span><br>
+        <span class="pa">Yuchen Zhang</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Empirical Methods on Natural Language Processing (EMNLP)</span>, 2017<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1707.07806">paper</a>
+          <a href="https://worksheets.codalab.org/worksheets/0x4d6dbfc5ec7f44a6a4da4ca2a9334d6e/">CodaLab</a>
+          <a href="resource/EMNLP2017-slides.pdf">slides</a>
+        </span>
+        <p class=red><strong>Errata:</strong> In Equation 9, the term in the logarithm should be
+        <span id=errata-after>p<sub>i</sub><sup>+</sup> / p<sub>i</sub><sup>-</sup></span>
+        instead of
+        <span id=errata-before>p<sub>i</sub><sup>+</sup> / (p<sub>i</sub><sup>+</sup> + p<sub>i</sub><sup>-</sup>)</span>.<br>
+        Version 2 on arXiv has the corrected formula.</p>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">From Language to Programs: Bridging Reinforcement Learning and Maximum Marginal Likelihood</span><br>
+        <span class="pa">Kelvin Guu</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Evan Zheran Liu</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2017<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1704.07926">paper</a>
+          <a href="https://nlp.stanford.edu/projects/scone/">dataset</a>
+          <a href="https://worksheets.codalab.org/worksheets/0x88c914ee1d4b4a4587a07f36f090f3e5/">CodaLab</a> |
+          More on <a href="http://kelvinguu.com/">Kelvin's website</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Inferring Logical Forms From Denotations</span><br>
+        <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2016<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1606.06900">paper</a>
+          <a href="https://worksheets.codalab.org/worksheets/0x47cc64d9c8ba4a878807c7c35bb22a42/">CodaLab</a>
+          <a href="resource/ACL2016-slides.pdf">slides</a>
+          <a href="https://nlp.stanford.edu/software/sempre/wikitable/dpd/">computed output</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Simpler Context-Dependent Logical Forms via Model Projections</span><br>
+        <span class="pa">Reginald Long</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2016<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1606.05378">paper</a>
+          <a href="https://nlp.stanford.edu/projects/scone/">dataset</a>
+          <a href="https://worksheets.codalab.org/worksheets/0xad3fc9f52f514e849b282a105b1e3f02/">CodaLab</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Compositional Semantic Parsing on Semi-Structured Tables</span><br>
+        <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
+        <span class="pc">Association for Computational Linguistics (ACL)</span>, 2015<br>
+        <span class="ps">
+          <a href="https://arxiv.org/abs/1508.00305">paper</a>
+          <a href="http://www-nlp.stanford.edu/software/sempre/wikitable/">project + dataset</a>
+          <a href="https://worksheets.codalab.org/worksheets/0xf26cd79d4d734287868923ad1067cf4c/">CodaLab</a>
+          <a href="resource/ACL2015-slides.pdf">slides</a>
+          <a href="resource/ACL2015-poster.pdf">poster</a>
+          <a href="http://nlp.stanford.edu/blog/wikitablequestions-a-complex-real-world-question-understanding-dataset/">blog post</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+    </ul>
+    <h3>Dialog</h3>
+    <ul class="publications">
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Unsupervised Relation Detection Using Automatic Alignment of Query Patterns Extracted from Knowledge Graphs and Query Click Logs</span><br>
+        <span class="pa me">Panupong Pasupat</span>, <span class="pa">Dilek Hakkani-Tür</span><br>
+        <span class="pc">Interspeech</span>, 2015<br>
+        <span class="ps">
+          <a href="resource/InterSpeech2015-paper.pdf">paper</a>
+          <a href="resource/InterSpeech2015-slides.pptx">slides</a>
+          <a href="http://research.microsoft.com/pubs/238362/Celikyilmaz.pdf">extended work</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">Query Understanding Enhanced by Hierarchical Parsing Structures</span><br>
+        <span class="pa">Jingjing Liu</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Yining Wang</span>, <span class="pa">Scott Cyphers</span>, <span class="pa">Jim Glass</span><br>
+        <span class="pc">Automatic Speech Recognition and Understanding Workshop (ASRU)</span>, 2013
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">ASGARD: a Portable Architecture for Multilingual Dialogue Systems</span><br>
+        <span class="pa">Jingjing Liu</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Scott Cyphers</span>, <span class="pa">Jim Glass</span><br>
+        <span class="pc">International Conference on Acoustics, Speech and Signal Processing (ICASSP)</span>, 2013<br>
+        <span class="ps">
+          <a href="http://groups.csail.mit.edu/sls/publications/2013/Liu_ICASSP-2013.pdf">paper</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
+        <span class="pt">A Conversational Movie Search System Based on Conditional Random Fields</span><br>
+        <span class="pa">Jingjing Liu</span>, <span class="pa">Scott Cyphers</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Ian Mcgraw</span>, <span class="pa">Jim Glass</span><br>
+        <span class="pc">Interspeech</span>, 2012<br>
+        <span class="ps">
+          <a href="http://groups.csail.mit.edu/sls/archives/root/publications/2012/Liu-Interspeech12.pdf">paper</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js" integrity="sha384-L9gv4ooDLrYwW0QCM6zY3EKSSPrsuUncpx26+erN0pJX4wv1B1FzVW1SvpcJPx/8" crossorigin="anonymous"></script>
+<script>
+katex.render("\\frac{p_i^+}{p_i^+ + p_i^-}", document.getElementById('errata-before'));
+katex.render("\\frac{p_i^+}{p_i^-}", document.getElementById('errata-after'));
+</script>
+</html>
