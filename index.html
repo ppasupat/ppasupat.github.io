@@ -22,9 +22,10 @@
       <p>PhD Student</p>
       <p>Department of Computer Science, Stanford University</p>
       <p class="ps">
-        <span class="linklike" href="#" id="email">Email</span>
         <a href="resource/resume.pdf">Resume</a>
         <a href="https://github.com/ppasupat/">GitHub</a>
+        <a href="#" id="email">Email</a>
+        <span id="email-box" class="hidden"></span>
       </p>
       <noscript>(Please enable JavaScript to see the email address)</noscript>
     </div>
@@ -55,7 +56,7 @@
       <ul>
         <li><a href="https://worksheets.codalab.org/worksheets/0xca1104da2ecb42c2b9c0cde07256e033/">
         SEMPRE models</a> trained on the dataset.</li>
-        <li><a href="https://nlp.stanford.edu/software/sempre/wikitable/dpd/">DPD Outputs on WikiTableQuestions</a>:
+        <li><a href="https://nlp.stanford.edu/software/sempre/wikitable/dpd/">DPD Outputs</a>:
         Inferred consistent logical forms for the training examples in the WikiTableQuestions dataset.</li>
       </ul>
       <li><a href="https://nlp.stanford.edu/projects/scone/">SCONE</a>:
@@ -289,7 +290,7 @@
 </div>
 
 </body>
-<script type="text/javascript">(function(){var a=document.getElementById("email");a.onclick=function(){if("Email"===a.innerHTML){for(var c=[],b=0;24>b;b++)c.push("po_pqk[m@bq+oo[gfnpa*`^n".charCodeAt(b)+b%8);a.innerHTML=String.fromCharCode.apply(null,c);a.className="blocky";return!1}return!0}})();</script>
+<script type="text/javascript">(function(){var a=document.getElementById("email"),d=document.getElementById("email-box");a.onclick=function(){for(var c=[],b=0;24>b;b++)c.push("po_pqk[m@bq+oo[gfnpa*`^n".charCodeAt(b)+b%8);d.innerHTML=String.fromCharCode.apply(null,c);a.className="hidden";d.className="";return!1}})();</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js" integrity="sha384-L9gv4ooDLrYwW0QCM6zY3EKSSPrsuUncpx26+erN0pJX4wv1B1FzVW1SvpcJPx/8" crossorigin="anonymous"></script>
 <script>
 katex.render("\\frac{p_i^+}{p_i^+ + p_i^-}", document.getElementById('errata-before'));
