@@ -35,8 +35,8 @@ ul ul {
   margin-top: .3em;
 }
 
-.blocky {
-  display: block;
+.hidden {
+  display: none !important;
 }
 
 /* Layout */
@@ -66,6 +66,11 @@ ul ul {
 
 #header-info p, #info p{
   margin: 0.3em 0;
+}
+
+#email-box {
+  color: #081;
+  margin-left: .3em;
 }
 
 @media (max-width: 500px) {
@@ -153,7 +158,7 @@ ul.publications li {
   
 }
 
-.ps a, .ps .linklike {
+.ps a {
   display: inline-block;
   border: solid 1px #AAA;
   padding: 0.05em 0.4em;
