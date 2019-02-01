@@ -103,6 +103,11 @@ hr {
   padding: 0; 
 }
 
+#info ul {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
 li {
   margin-bottom: .3em;
 }
