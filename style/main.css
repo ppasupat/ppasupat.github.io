@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
 /* Global */
 html {
   height: 100%;
@@ -5,12 +7,11 @@ html {
 }
 
 body {
-  font-family: 'Lato', Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  background: #FAFAFC;
+  font-family: 'Lato', sans-serif;
+  background: white;
+  color: black;
   margin: 0;
-  line-height: 1.4;
-  color: #222;
+  line-height: 1.45;
 }
 
 a {
@@ -64,7 +65,7 @@ ul ul {
   padding: 0.5em 1em;
 }
 
-#header-info p, #info p{
+#header-info p, #info p {
   margin: 0.3em 0;
 }
 
@@ -90,8 +91,12 @@ ul ul {
   width: 150px;
 }
 
+h1 {
+  margin: .5em 0;
+}
+
 .section {
-  margin: 2em 1em;
+  margin: 1.5em 1em;
 }
 
 hr {
@@ -165,7 +170,7 @@ ul.publications li {
   display: inline-block;
   border: solid 1px #AAA;
   padding: 0.05em 0.4em;
-  margin: 0.3em 0.2em;
+  margin: 0.5em 0.2em 0.3em;
   border-radius: 0.5em;
   text-decoration: none;
   background-color: #EEE;
