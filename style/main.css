@@ -52,6 +52,7 @@ ul ul {
   padding: 0;
   width: 100%;
   position: relative;
+  min-height: 200px;
 }
 
 #header-photo {
@@ -62,7 +63,7 @@ ul ul {
 
 #header-info {
   margin-left: 180px;
-  padding: 0.5em 1em;
+  padding: 1.5em 1em;
 }
 
 #header-info p, #info p {
