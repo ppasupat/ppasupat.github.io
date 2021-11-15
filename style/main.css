@@ -180,3 +180,12 @@ ul.publications li {
 .sidenote {
   font-size: 70%;
 }
+
+.pc abbr {
+  text-decoration-color: #aaa;
+}
+
+.pb {
+  color: #555;
+  font-style: italic;
+}

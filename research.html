@@ -21,38 +21,23 @@
 
 <div id="wrapper">
 
-  <div class="section" id="resources">
-    <h2>Resources</h2>
-    <ul>
-      <li><a href="https://nlp.stanford.edu/software/sempre/">SEMPRE</a>:
-      Our framework for training semantic parsers from denotations.</li>
-      <li><a href="https://ppasupat.github.io/WikiTableQuestions/">WikiTableQuestions Dataset</a>:
-      A dataset of complex question on Wikipedia tables.
-      <ul>
-        <li><a href="https://ppasupat.github.io/WikiTableQuestions/viewer/">Dataset viewer</a></li>
-        <li><a href="https://worksheets.codalab.org/worksheets/0xca1104da2ecb42c2b9c0cde07256e033/">
-        SEMPRE models</a> trained on the dataset.</li>
-        <li><a href="https://nlp.stanford.edu/software/sempre/wikitable/dpd/">DPD Outputs</a>:
-        Inferred consistent logical forms for the training examples in the WikiTableQuestions dataset.</li>
-      </ul>
-      <li><a href="https://nlp.stanford.edu/projects/scone/">SCONE</a>:
-      Sequential CONtext-dependent Execution dataset.</li>
-      <li><a href="https://stanfordnlp.github.io/miniwob-plusplus/">MiniWoB++ Benchmark</a>:
-      A benchmark for learning reinforcement learning agents that interact with websites.
-      An extension of OpenAI MiniWoB benchmark.</li>
-    </ul>
-  </div>
-
-  <hr>
-  
   <div class="section" id="publication">
     <h2>Publications</h2>
+
+    <h3>At Google</h3>
     <ul class="publications">
       <!------------------------------------------------------------>
       <li>
         <span class="pt">Controllable Semantic Parsing via Retrieval Augmentation</span><br>
         <span class="pa">Panupong Pasupat</span>, <span class="pa">Yuan Zhang</span>, <span class="pa">Kelvin Guu</span><br>
-        <span class="pc"><span title="Empirical Methods on Natural Language Processing">EMNLP</span>, 2021</span><br>
+        <span class="pc"><abbr title="Empirical Methods on Natural Language Processing">EMNLP</abbr>, 2021</span><br>
+        <span class="pb">
+          CASPER is a semantic parser that retrieves labeled examples resembling the input query,
+          and then augments them to the input before applying seq2seq.
+          Apart from getting state-of-the-art,
+          by manipulating the retrieval index (e.g., adding examples in a new domain),
+          we can change the parser's behavior at test time without additional training!
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/2110.08458">paper</a>
           <a href="https://casperparser.page.link/code">code</a>
@@ -62,7 +47,11 @@
       <li>
         <span class="pt">Graph-Based Decoding for Task Oriented Semantic Parsing</span><br>
         <span class="pa">Jeremy R. Cole</span>, <span class="pa">Nanjiang Jiang</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Luheng He</span>, <span class="pa">Peter Shaw</span><br>
-        <span class="pc"><span title="Empirical Methods on Natural Language Processing">EMNLP</span>, 2021</span><br>
+        <span class="pc"><abbr title="Empirical Methods on Natural Language Processing">EMNLP</abbr>, 2021</span><br>
+        <span class="pb">
+          We apply the <a href="https://arxiv.org/abs/1611.01734">graph-based syntactic parsing</a> method on semantic parsing.
+          It's competitive with seq2seq but can also utilize partial annotations effectively!
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/2109.04587">paper</a>
         </span>
@@ -72,6 +61,11 @@
         <span class="pt">Unlocking Compositional Generalization in Pre-trained Models Using Intermediate Representations</span><br>
         <span class="pa">Jonathan Herzig</span>, <span class="pa">Peter Shaw</span>, <span class="pa">Ming-Wei Chang</span>, <span class="pa">Kelvin Guu</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Yuan Zhang</span><br>
         <span class="pc">arXiv, 2021</span><br>
+        <span class="pb">
+          Seq2seq is bad at generalizing to unseen compositions... or is it?
+          By predicting an intermediate representation of the output before the actual output,
+          seq2seq semantic parsers suddenly perform very well on many compositional generalization benchmarks!
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/2104.07478">paper</a>
         </span>
@@ -80,7 +74,13 @@
       <li>
         <span class="pt">Few-shot Intent Classification and Slot Filling with Retrieved Examples</span><br>
         <span class="pa">Dian Yu</span>, <span class="pa">Luheng He</span>, <span class="pa">Yuan Zhang</span>, <span class="pa">Xinya Du</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Qi Li</span><br>
-        <span class="pc"><span title="North American Chapter of the Association for Computational Linguistics">NAACL</span>, 2021</span><br>
+        <span class="pc"><abbr title="North American Chapter of the Association for Computational Linguistics">NAACL</abbr>, 2021</span><br>
+        <span class="pb">
+          We present a retrieval-based semantic parser with span-level retrieval:
+          for each token span of the input, we retrieve spans from the support set that are likely to have the same intent/slot label
+          (scored using contextualized span embeddings).
+          It can do few-shot slot filling very efficiently!
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/2104.05763">paper</a>
         </span>
@@ -89,7 +89,15 @@
       <li>
         <span class="pt">Compositional Generalization and Natural Language Variation: Can a Semantic Parsing Approach Handle Both?</span><br>
         <span class="pa">Peter Shaw</span>, <span class="pa">Ming-Wei Chang</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Kristina Toutanova</span><br>
-        <span class="pc"><span title="Association for Computational Linguistics">ACL</span>, 2021</span><br>
+        <span class="pc"><abbr title="Association for Computational Linguistics">ACL</abbr>, 2021</span><br>
+        <span class="pb">
+          Benchmarks measuring the ability to generalize to new compositions
+          (e.g., train on "walk", "walk twice" and "dax"; test on "<a href="https://arxiv.org/abs/1711.00350">dax twice</a>")
+          are mostly synthetic, so prior methods can just ignore linguistic variations (main challenge of other semantic parsing datasets).
+          We (1) propose TMCD, a way to create benchmarks with both compositional generalization and language variation;
+          (2) show that prior methods mostly handle only one axis;
+          and (3) present NQG-T5, a grammar+seq2seq hybrid model that performs well on both axes.
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/2010.12725">paper</a>
           <a href="https://github.com/google-research/language/tree/master/language/nqg">code</a>
@@ -98,21 +106,42 @@
       <!------------------------------------------------------------>
       <li>
         <span class="pt">REALM: Retrieval-Augmented Language Model Pre-Training</span><br>
-        <span class="pa">Kelvin Guu*</span>, <span class="pa">Kenton Lee*</span>, <span class="pa">Zora Tung</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Ming-Wei Chang</span><br>
+        <span class="pa">Kelvin Guu*</span>, <span class="pa">Kenton Lee*</span>, <span class="pa">Zora Tung</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Ming-Wei Chang</span>
         <span class="sidenote">(*equal contributions)</span><br>
-        <span class="pc"><span title="International Conference on Machine Learning">ICML</span>, 2020</span><br>
+        <span class="pc"><abbr title="International Conference on Machine Learning">ICML</abbr>, 2020</span><br>
+        <span class="pb">
+          Pre-trained language models contain lots of world knowledge, but it's stored implicitly (hard to interpret + scale poorly).
+          REALM is a pre-training paradigm that adds a trainable knowledge retriever:
+          the model retrieves and attends over documents from an explicit corpus (like Wikipedia) when filling missing words (during pre-training)
+          or doing downstream tasks (during fine-tuning + evaluation).
+          It beats T5 on open-domain question answering!
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/2002.08909">paper</a>
           <a href="https://ai.googleblog.com/2020/08/realm-integrating-retrieval-into.html">blog post</a>
           <a href="https://github.com/google-research/language/tree/master/language/realm">code</a>
         </span>
       </li>
-      <!------------------------------------------------------------>
+    </ul>
+
+    <!------------------------------------------------------------>
+
+    <h3>At Stanford</h3>
+    <ul class="publications">
       <li>
         <span class="pt">SPoC: Search-based Pseudocode to Code</span><br>
         <span class="pa">Sumith Kulal*</span>, <span class="pa me">Panupong Pasupat*</span>, <span class="pa">Kartik Chandra</span>, <span class="pa">Mina Lee</span>, <span class="pa">Oded Padon</span>, <span class="pa">Alex Aiken</span>, <span class="pa">Percy Liang</span>
         <span class="sidenote">(*equal contributions)</span><br>
-        <span class="pc"><span title="Conference on Neural Information Processing Systems">NeurIPS</span>, 2019</span><br>
+        <span class="pc"><abbr title="Conference on Neural Information Processing Systems">NeurIPS</abbr>, 2019</span><br>
+        <span class="pb">
+          Let's stop using <a href="https://bluesclues.fandom.com/wiki/Blue">BLEU</a>
+          or <a href="https://sonic.fandom.com/wiki/Rouge_the_Bat">ROUGE</a>
+          as the main metric for language-to-code models;
+          they don't measure functional correctness of the generated code.
+          SPoC is a unit-test-based language-to-code benchmark focusing on functional correctness. 
+          We also present a model that uses compilation errors to guide search
+          when synthesizing long code.
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/1906.04908">paper</a>
           <a href="https://sumith1896.github.io/spoc/">dataset + code</a>
@@ -124,7 +153,13 @@
       <li>
         <span class="pt">Span-based Hierarchical Semantic Parsing for Task-Oriented Dialog</span><br>
         <span class="pa me">Panupong Pasupat</span>, <span class="pa">Sonal Gupta</span>, <span class="pa">Karishma Mandyam</span>, <span class="pa">Rushin Shah</span>, <span class="pa">Mike Lewis</span>, <span class="pa">Luke Zettlemoyer</span><br>
-        <span class="pc"><span title="Empirical Methods on Natural Language Processing">EMNLP</span>, 2019</span><br>
+        <span class="pc"><abbr title="Empirical Methods on Natural Language Processing">EMNLP</abbr>, 2019</span><br>
+        <span class="pb">
+          Consider the task of parsing sentences into hierarchical intent-slot trees.
+          Turns out the objective function can be factored into a sum of independent classification tasks
+          (i.e., predict the intent/slot/null label for each token span),
+          which is super efficient to optimize!
+        </span><br>
         <span class="ps">
           <a href="https://www.aclweb.org/anthology/D19-1163/">paper</a>
           <a href="http://fb.me/semanticparsingdialog">dataset</a>
@@ -134,19 +169,15 @@
       </li>
       <!------------------------------------------------------------>
       <li>
-        <span class="pt">Natural Language Interfaces for Semi-Structured Web Pages</span><br>
-        <span class="pa me">Panupong Pasupat</span><br>
-        <span class="pc">Ph.D. Dissertation, 2019</span><br>
-        <span class="ps">
-          <a href="resource/THESIS-v3e.pdf">thesis</a>
-          <a href="resource/talk-defense.pdf">defense slides</a>
-        </span>
-      </li>
-      <!------------------------------------------------------------>
-      <li>
         <span class="pt">Improving Semantic Parsing for Task Oriented Dialog</span><br>
         <span class="pa">Arash Einolghozati</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Sonal Gupta</span>, <span class="pa">Rushin Shah</span>, <span class="pa">Mrinal Mohit</span>, <span class="pa">Mike Lewis</span>, <span class="pa">Luke Zettlemoyer</span><br>
-        <span class="pc">Conversational AI Workshop at <span title="Conference on Neural Information Processing Systems">NeurIPS</span>, 2018</span><br>
+        <span class="pc">Conversational AI Workshop at <abbr title="Conference on Neural Information Processing Systems">NeurIPS</abbr>, 2018</span><br>
+        <span class="pb">
+          We apply a bunch of tricks (ELMo, ensembling, re-ranking)
+          on the <a href="https://arxiv.org/abs/1810.07942">RNNG</a> model for the
+          <a href="http://fb.me/semanticparsingdialog">MTOP</a> dataset and get a whopping +6.4% accuracy!
+          Goes to show how effective these simple tricks are.
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/1902.06000">paper</a>
           <a href="http://fb.me/semanticparsingdialog">dataset</a>
@@ -154,9 +185,37 @@
       </li>
       <!------------------------------------------------------------>
       <li>
+        <span class="pt">Natural Language Interfaces for Semi-Structured Web Pages</span><br>
+        <span class="pa me">Panupong Pasupat</span><br>
+        <span class="pc">Ph.D. Dissertation, 2019</span><br>
+        <span class="pb">
+          Covers 4 of my papers
+          (<a href="https://nlp.stanford.edu/pubs/pasupat-liang-acl2014.pdf">1</a>,
+          <a href="https://arxiv.org/abs/1508.00305">2</a>,
+          <a href="https://arxiv.org/abs/1606.06900">3</a>,
+          <a href="https://arxiv.org/abs/1707.07806">4</a>)
+          related to compositional reasoning on web page contents.
+          I managed to have
+          <a href="https://nlp.stanford.edu/~manning/">three</a>
+          <a href="https://web.stanford.edu/~cgpotts/">different</a>
+          <a href="https://cs.stanford.edu/~chrismre/">Christophers</a>
+          on my thesis defense committee.
+        </span><br>
+        <span class="ps">
+          <a href="resource/THESIS-v3e.pdf">thesis</a>
+          <a href="resource/talk-defense.pdf">defense slides</a>
+        </span>
+      </li>
+      <!------------------------------------------------------------>
+      <li>
         <span class="pt">Mapping Natural Language Commands to Web Elements</span><br>
         <span class="pa me">Panupong Pasupat</span>, <span class="pa">Tian-Shun Jiang</span>, <span class="pa">Evan Liu</span>, <span class="pa">Kelvin Guu</span>, <span class="pa">Percy Liang</span><br>
-        <span class="pc"><span title="Empirical Methods on Natural Language Processing">EMNLP</span>, 2018</span><br>
+        <span class="pc"><abbr title="Empirical Methods on Natural Language Processing">EMNLP</abbr>, 2018</span><br>
+        <span class="pb">
+          Given a web page and a command like "expand the first article",
+          the task is to identify the relevant HTML element.
+          We present a dataset and baseline methods.
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/1808.09132">paper</a>
           <a href="https://github.com/stanfordnlp/phrasenode">dataset + code</a>
@@ -168,7 +227,15 @@
         <span class="pt">Reinforcement Learning on Web Interfaces using Workflow-Guided Exploration</span><br>
         <span class="pa">Evan Zheran Liu*</span>, <span class="pa">Kelvin Guu*</span>, <span class="pa me">Panupong Pasupat*</span>, <span class="pa">Tianlin Shi</span>, <span class="pa">Percy Liang</span>
         <span class="sidenote">(*equal contributions)</span><br>
-        <span class="pc"><span title="International Conference on Learning Representations">ICLR</span>, 2018</span><br>
+        <span class="pc"><abbr title="International Conference on Learning Representations">ICLR</abbr>, 2018</span><br>
+        <span class="pb">
+          A reinforcement learning agent will have a hard time exploring the search space
+          if the reward is sparse (e.g., 1 at the very end of the few correct sequences and -1 otherwise).
+          Now say we have some human demonstrations.
+          Instead of directly training (behavior cloning) on them,
+          WGE constrains the exploration space based on these demonstrations.
+          We also release MiniWoB++, a controlled benchmark for web page interaction tasks.
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/1802.08802">paper</a>
           <a href="https://stanfordnlp.github.io/wge/">code</a>
@@ -180,7 +247,13 @@
       <li>
         <span class="pt">Macro Grammars and Holistic Triggering for Efficient Semantic Parsing</span><br>
         <span class="pa">Yuchen Zhang</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
-        <span class="pc"><span title="Empirical Methods on Natural Language Processing">EMNLP</span>, 2017</span><br>
+        <span class="pc"><abbr title="Empirical Methods on Natural Language Processing">EMNLP</abbr>, 2017</span><br>
+        <span class="pb">
+          Consider a semantic parser that must search for programs (logical forms) with the correct execution results during training.
+          To speed up search, our method retrieves past training examples resembling the current example,
+          and then try out the search actions (represented as "program macros") from those examples.
+          This gives 11x speed up!
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/1707.07806">paper</a>
           <a href="https://worksheets.codalab.org/worksheets/0x4d6dbfc5ec7f44a6a4da4ca2a9334d6e/">CodaLab</a>
@@ -196,7 +269,15 @@
       <li>
         <span class="pt">From Language to Programs: Bridging Reinforcement Learning and Maximum Marginal Likelihood</span><br>
         <span class="pa">Kelvin Guu</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Evan Zheran Liu</span>, <span class="pa">Percy Liang</span><br>
-        <span class="pc"><span title="Association for Computational Linguistics">ACL</span>, 2017</span><br>
+        <span class="pc"><abbr title="Association for Computational Linguistics">ACL</abbr>, 2017</span><br>
+        <span class="pb">
+          We find connections between <a href="https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html">REINFORCE</a>
+          and maximum marginal likelihood training.
+          When the reward is 1 at the end of a few valid sequences and 0 otherwise,
+          the two methods turn out to be very similar!
+          We propose a hybrid that searches more efficiently and avoids learning unintended sequences.
+          We also release SCONE, a sequential context-dependent semantic parsing dataset.
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/1704.07926">paper</a>
           <a href="https://nlp.stanford.edu/projects/scone/">dataset</a>
@@ -208,7 +289,13 @@
       <li>
         <span class="pt">Inferring Logical Forms From Denotations</span><br>
         <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
-        <span class="pc"><span title="Association for Computational Linguistics">ACL</span>, 2016</span><br>
+        <span class="pc"><abbr title="Association for Computational Linguistics">ACL</abbr>, 2016</span><br>
+        <span class="pb">
+          We want to train a semantic parser that parses sentences into executable programs (logical forms),
+          but the training data only has the execution results annotated.
+          We propose a method to recover the programs from these execution results,
+          while also avoiding programs that execute to the right answers for wrong reasons.
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/1606.06900">paper</a>
           <a href="https://worksheets.codalab.org/worksheets/0x47cc64d9c8ba4a878807c7c35bb22a42/">CodaLab</a>
@@ -220,7 +307,14 @@
       <li>
         <span class="pt">Simpler Context-Dependent Logical Forms via Model Projections</span><br>
         <span class="pa">Reginald Long</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
-        <span class="pc"><span title="Association for Computational Linguistics">ACL</span>, 2016</span><br>
+        <span class="pc"><abbr title="Association for Computational Linguistics">ACL</abbr>, 2016</span><br>
+        <span class="pb">
+          Learning a semantic parser that turns instructions into multi-step programs is a pain
+          when you only have execution results as supervision; e.g.,
+          there are many possible programs executing to the same object.
+          We propose to train a model producing more abstract programs first,
+          and then use it to bootstrap the model producing full programs. 
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/1606.05378">paper</a>
           <a href="https://nlp.stanford.edu/projects/scone/">dataset</a>
@@ -231,7 +325,17 @@
       <li>
         <span class="pt">Compositional Semantic Parsing on Semi-Structured Tables</span><br>
         <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
-        <span class="pc"><span title="Association for Computational Linguistics">ACL</span>, 2015</span><br>
+        <span class="pc"><abbr title="Association for Computational Linguistics">ACL</abbr>, 2015</span><br>
+        <span class="pb">
+          Prior works on semantic parsing for question answering focus on either
+          the scope of knowledge source (breadth) or the question complexity (depth),
+          but not both. Our WikiTableQuestions dataset,
+          which contains complex questions on semi-structured web tables,
+          starts a new era of caring about both breadth and depth simultaneously,
+          which has become a standard in subsequent datasets like
+          <a href="https://github.com/salesforce/WikiSQL">WikiSQL</a> and
+          <a href="https://yale-lily.github.io/spider">Spider</a>.
+        </span><br>
         <span class="ps">
           <a href="https://arxiv.org/abs/1508.00305">paper</a>
           <a href="https://ppasupat.github.io/WikiTableQuestions/">project + dataset</a>
@@ -245,7 +349,13 @@
       <li>
         <span class="pt">Unsupervised Relation Detection Using Automatic Alignment of Query Patterns Extracted from Knowledge Graphs and Query Click Logs</span><br>
         <span class="pa me">Panupong Pasupat</span>, <span class="pa">Dilek Hakkani-Tür</span><br>
-        <span class="pc"><span title="Interspeech">Interspeech</span>, 2015</span><br>
+        <span class="pc"><abbr title="Interspeech">Interspeech</abbr>, 2015</span><br>
+        <span class="pb">
+          Can we learn a relation detector ("Who directed Avatar" &rarr; directed_by) without any annotated data?
+          We propose some nifty methods to synthesize training data from
+          a <a href="https://dic.pixiv.net/a/%E5%8F%A4%E6%98%8E%E5%9C%B0%E3%81%95%E3%81%A8%E3%82%8A">knowledge graph</a>
+        and a query click log.
+        </span><br>
         <span class="ps">
           <a href="resource/InterSpeech2015-paper.pdf">paper</a>
           <a href="resource/InterSpeech2015-slides.pptx">slides</a>
@@ -256,18 +366,33 @@
       <li>
         <span class="pt">Zero-Shot Entity Extraction from Web Pages</span><br>
         <span class="pa me">Panupong Pasupat</span>, <span class="pa">Percy Liang</span><br>
-        <span class="pc"><span title="Association for Computational Linguistics">ACL</span>, 2014</span><br>
+        <span class="pc"><abbr title="Association for Computational Linguistics">ACL</abbr>, 2014</span><br>
+        <span class="pb">
+          We learn a model that extracts an entity list of an arbitrary category
+          (e.g., "list of hiking trails") from the given web page.
+          This was before Google started to show extracted lists as
+          <a href="resource/cope.png">featured snippets</a>
+          in search results.
+        </span><br>
         <span class="ps">
           <a href="https://nlp.stanford.edu/pubs/pasupat-liang-acl2014.pdf">paper</a>
           <a href="http://www-nlp.stanford.edu/software/sempre/web-entity-extractor-ACL2014/">project + dataset</a>
           <a href="resource/ACL2014-slides.v1.pdf">slides</a>
         </span>
       </li>
-      <!------------------------------------------------------------>
+    </ul>
+
+    <!------------------------------------------------------------>
+
+    <h3>At MIT</h3>
+    <ul class="publications">
       <li>
         <span class="pt">Query Understanding Enhanced by Hierarchical Parsing Structures</span><br>
         <span class="pa">Jingjing Liu</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Yining Wang</span>, <span class="pa">Scott Cyphers</span>, <span class="pa">Jim Glass</span><br>
-        <span class="pc"><span title="Automatic Speech Recognition and Understanding Workshop">ASRU</span>, 2013</span><br>
+        <span class="pc"><abbr title="Automatic Speech Recognition and Understanding Workshop">ASRU</abbr>, 2013</span><br>
+        <span class="pb">
+          Use syntactic features to enhance a CRF slot tagging model.
+        </span><br>
         <span class="ps">
           <a href="https://groups.csail.mit.edu/sls/publications/2013/Liu_ASRU_2013.pdf">paper</a>
         </span>
@@ -276,7 +401,12 @@
       <li>
         <span class="pt">ASGARD: a Portable Architecture for Multilingual Dialogue Systems</span><br>
         <span class="pa">Jingjing Liu</span>, <span class="pa me">Panupong Pasupat</span>, <span class="pa">Scott Cyphers</span>, <span class="pa">Jim Glass</span><br>
-        <span class="pc"><span title="International Conference on Acoustics, Speech and Signal Processing">ICASSP</span>, 2013</span><br>
+        <span class="pc"><abbr title="International Conference on Acoustics, Speech and Signal Processing">ICASSP</abbr>, 2013</span><br>
+        <span class="pb">
+          A dialog system with CRF-based slot tagging.
+          I implemented the crowdsourcing annotation interface as well as some CRF features.
+          Also supports Chinese (character-level tagging).
+        </span><br>
         <span class="ps">
           <a href="http://groups.csail.mit.edu/sls/publications/2013/Liu_ICASSP-2013.pdf">paper</a>
         </span>
@@ -285,7 +415,11 @@
       <li>
         <span class="pt">A Conversational Movie Search System Based on Conditional Random Fields</span><br>
         <span class="pa">Jingjing Liu</span>, <span class="pa">Scott Cyphers</span>, <span class="pa">Panupong Pasupat</span>, <span class="pa">Ian Mcgraw</span>, <span class="pa">Jim Glass</span><br>
-        <span class="pc"><span title="Interspeech">Interspeech</span>, 2012</span><br>
+        <span class="pc"><abbr title="Interspeech">Interspeech</abbr>, 2012</span><br>
+        <span class="pb">
+          A dialog system with CRF-based slot tagging.
+          I implemented the crowdsourcing annotation interface as well as some CRF features.
+        </span><br>
         <span class="ps">
           <a href="http://groups.csail.mit.edu/sls/archives/root/publications/2012/Liu-Interspeech12.pdf">paper</a>
         </span>
