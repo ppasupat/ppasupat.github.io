@@ -9,7 +9,7 @@ html {
 body {
   font-family: 'Lato', sans-serif;
   background: white;
-  color: black;
+  color: #222;
   margin: 0;
   line-height: 1.45;
 }
@@ -26,10 +26,6 @@ a:hover{
   text-align: center;
   margin-left: 0;
   margin-right: 0;
-}
-
-.red {
-  color: #A00;
 }
 
 ul ul {
@@ -154,11 +150,19 @@ ul.publications li {
 
 .pt {
   font-weight: bold;
-  color: #250;
+  
 }
 
 .pa {
-  color: #520;
+
+}
+
+.pc {
+
+}
+
+.pc abbr {
+  text-decoration-color: #aaa;
 }
 
 .ps a {
@@ -179,13 +183,4 @@ ul.publications li {
 
 .sidenote {
   font-size: 70%;
-}
-
-.pc abbr {
-  text-decoration-color: #aaa;
-}
-
-.pb {
-  color: #555;
-  font-style: italic;
 }
