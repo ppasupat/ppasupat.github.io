@@ -142,6 +142,11 @@ li {
   border-bottom: 4px solid #ddd;
 }
 
+/* Home */
+
+#bio { color: white; }
+#bio.real { color: #222; }
+
 /* Publications */
 
 ul.publications li {
