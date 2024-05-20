@@ -146,6 +146,7 @@ li {
 
 #bio { color: white; }
 #bio.real { color: #222; }
+#bio.real > p:first-child { color: white; font-size: 1px; }
 
 /* Publications */
 
