@@ -45,21 +45,7 @@ ul ul {
 }
 
 #header {
-  padding: 0;
-  width: 100%;
-  position: relative;
-  min-height: 200px;
-}
-
-#header-photo {
-  position: absolute;
-  width: 150px;
-  padding: 15px;
-}
-
-#header-info {
-  margin-left: 180px;
-  padding: 1.5em 1em;
+  text-align: center;
 }
 
 #header-info p, #info p {
@@ -69,23 +55,6 @@ ul ul {
 #email-box {
   color: #081;
   margin-left: .3em;
-}
-
-@media (max-width: 500px) {
-  #header-photo {
-    position: relative;
-    width: auto;
-    text-align: center;
-  }
-  #header-info {
-    margin-left: 0;
-    padding-top: 0;
-    text-align: center;
-  }
-}
-
-#photo {
-  width: 150px;
 }
 
 h1 {
